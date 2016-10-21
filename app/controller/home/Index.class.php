@@ -4,10 +4,8 @@ class Index extends CModel{
         parent::__construct();
     }
     public function index(){
-        /*if(!session('username')){
-            $this->urlJump('Login/index');
-            return;
-        }*/
+        $banner = C('Banner');
+        $this->assign('banner',$banner);
         $this->display();
 
     }

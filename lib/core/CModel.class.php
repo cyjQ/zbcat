@@ -97,8 +97,8 @@ class CModel{
      * 重写assign()方法
      */
 
-    public function assign($name,$value,$catch){
-        $this->smarty->assign($name,$value,$catch);
+    public function assign($name,$value,$nocatch=false){
+        $this->smarty->assign($name,$value,$nocatch);
     }
     /*
      * 页面跳转
