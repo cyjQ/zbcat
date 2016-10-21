@@ -33,6 +33,7 @@
             </ul>
         </div>
         <div class="email">
+           <a><img src="{$__IMG__}home/envelope.gif">&nbsp;359889053@qq.com</a>
         </div>
     </nav>
 </div>

@@ -22,4 +22,13 @@
     position: absolute;
     bottom: 0px;
     right: 0px;
+    text-align: center;
+    line-height: 30px;
+}
+.nav-nav .email a{
+    font-size: 12px;
+    color: #fff;
+}
+.nav-nav .email a img{
+    margin-bottom: 3px;
 }

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.14, created on 2016-10-21 16:29:28
+<?php /* Smarty version Smarty-3.1.14, created on 2016-10-21 18:11:34
          compiled from ".\templates\Public\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2652058070a8cbb3574-12571054%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8838b0bebc5dad3c8774c542dc140092ced24d1b' => 
     array (
       0 => '.\\templates\\Public\\header.tpl',
-      1 => 1477038388,
+      1 => 1477044691,
       2 => 'file',
     ),
   ),
@@ -23,6 +23,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '__CSS__' => 0,
     'banner' => 0,
     'vo' => 0,
+    '__IMG__' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -70,6 +71,8 @@ $_smarty_tpl->tpl_vars['vo']->_loop = true;
             </ul>
         </div>
         <div class="email">
+           <a><img src="<?php echo $_smarty_tpl->tpl_vars['__IMG__']->value;?>
+home/envelope.gif">&nbsp;359889053@qq.com</a>
         </div>
     </nav>
 </div>
