@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/conf/db_conf.php" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/conf/dir_conf.php" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/index.php" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/ini.php" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/lib/core/Model.php" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/lib/core/Router.class.php" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/lib/db.calss.php" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/lib/function.php" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/log/errlog.txt" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

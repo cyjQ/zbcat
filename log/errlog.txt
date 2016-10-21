@@ -1,0 +1,54 @@
+where 条件语句逻辑参数传递错误，'in'不合法 2016-08-20 22:26:04
+where 条件语句逻辑参数传递错误，'in'不合法 2016-08-20 22:26:07
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:29:01
+notbetween不合法 2016-08-20 22:31:39
+notbetween不合法 2016-08-20 22:31:54
+notbetween不合法 2016-08-20 22:31:55
+notbetween不合法 2016-08-20 22:31:56
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:36:14
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:36:35
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:36:35
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:36:35
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:36:35
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:37:04
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:37:06
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:37:07
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:37:07
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:37:07
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:37:07
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:38:20
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:38:22
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:38:23
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:38:24
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:38:24
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:38:24
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:38:24
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:39:26
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20   22:39:36
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:39:37
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:39:37
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:39:38
+where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22:39:38
+/var/www/zbcat/app/controller/home/group.class.php不存在 2016-08-24 22:53:17
+/var/www/zbcat/app/controller/home/group.class.php不存在 2016-08-24 22:53:20
+/var/www/zbcat/app/controller/home/group.class.php不存在 2016-08-24 22:53:21
+/var/www/zbcat/app/controller/home/group.class.php不存在 2016-08-24 22:53:21
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 22:54:07
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:10
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:11
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:12
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:12
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:32
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:35
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:36
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:36
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:36
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:36
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:37
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:54
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:56
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:57
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:57
+/var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:57
+c分组名不存在！ 2016-08-24 23:38:05
+/var/www/zbcat/app/controller/home/Login.class.php不存在 2016-08-25 23:41:28
