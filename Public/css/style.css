@@ -11,6 +11,7 @@
     border: none;
     border-bottom: 3px solid #5CA039;
     position: relative;
+    background:none;
 }
 .nav-nav .nav-div{
     position: absolute;
