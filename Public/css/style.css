@@ -1,5 +1,5 @@
 .logo-header .row div{
-    height: 100px;
+    height: 50px;
 
 }
 
@@ -32,4 +32,26 @@
 }
 .nav-nav .email a img{
     margin-bottom: 3px;
+}
+.youshi{
+    border: 1px solid red;
+}
+.youshi-detail-text{
+    width: 123px;
+    float: left;
+    text-align: center;
+    position: relative;
+    color: #99CC66;
+    font-size: 14px;
+    line-height: 50px;
+}
+.youshi-detail-text div{
+    background: #00AA88;
+    border-radius: 10px;
+    position: absolute;
+    top:21px;
+    left: 17px;
+}
+.top-header{
+    height: 15px;
 }

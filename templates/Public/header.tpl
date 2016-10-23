@@ -12,8 +12,27 @@
 </head>
 <body>
 <div class="container logo-header">
+    <div class="row top-header" style="background: url('{$__IMG__}home/top-background.png') repeat-x";>&nbsp;</div>
     <div class="row">
-        <div class="col-sm-1">1</div>
+        <div class="col-sm-4"><img src="{$__IMG__}home/comiis_logo.gif"/></div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-1" style="padding-top: 10px;">
+                    <div class="youshi-detail-text">
+                        <div style="height: 10px;width: 10px;"></div>
+                        简单实用
+                    </div>
+                    <div class="youshi-detail-text">
+                        <div style="height: 10px;width: 10px;"></div>
+                        简单实用
+                    </div>
+                    <div class="youshi-detail-text">
+                        <div style="height: 10px;width: 10px;"></div>
+                        简单实用
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="container">
