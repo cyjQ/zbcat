@@ -20,6 +20,10 @@ class CModel{
         $this->request    = $_REQUEST;
         $this->session    = $_SESSION;
         $this->HOST       =HOST;
+
+        $banner = C('Banner');
+        $this->assign('banner',$banner);
+        $this->assign('text_message',C('Text_message'));
     }
 
     /*

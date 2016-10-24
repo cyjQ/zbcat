@@ -7,14 +7,13 @@
         <div class="col-sm-12 text-message">Starting from an account</div>
         <div class="col-sm-6 sigin-in">
             <p>Existing account？</p>
-            <button type="button" class="btn btn-default btn-lg">Sign in</button>
+            <a type="button" class="btn btn-default btn-lg" href="#">Sign in</a>
         </div>
         <div class="col-sm-6 register-in">
             <p>No account？</p>
-            <button type="button" class="btn btn-default btn-lg">Register</button>
+            <a type="button" class="btn btn-default btn-lg" href="./?m=user&c=register">Register</a>
         </div>
 
     </div>
 </div>
-</body>
-</html>
+{include file="Public/footer.tpl" title=foo}
