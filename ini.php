@@ -5,12 +5,12 @@ include ROOT_DIR."lib".DIRECTORY_SEPARATOR."function.php";
 defined("CONFIG_PATH")?'':define('CONFIG_PATH',ROOT_DIR.'conf');
 //加载lib目录文件
 load(ROOT_DIR.'lib',1);
-defined('__PUBLIC__')?'':define('__PUBLIC__','/Public'.DIRECTORY_SEPARATOR);
+defined('__PUBLIC__')?'':define('__PUBLIC__','/Public'.'/');
 defined('__JS__')?'':define('__JS__',__PUBLIC__.'js'.DIRECTORY_SEPARATOR);
 defined('__CSS__')?'':define('__CSS__',__PUBLIC__.'css'.DIRECTORY_SEPARATOR);
 defined('__PLUGIN__')?'':define('__PLUGIN__',__PUBLIC__.'plugin'.DIRECTORY_SEPARATOR);
 defined('__UP__')?'':define('__UP__',__PUBLIC__.'up'.DIRECTORY_SEPARATOR);
-defined('__IMG__')?'':define('__IMG__',__PUBLIC__.'img'.DIRECTORY_SEPARATOR);
+defined('__IMG__')?'':define('__IMG__',__PUBLIC__.'img'.'/');
 defined('HOST')?'':define('HOST',$_SERVER['HTTP_HOST']);
 defined('DEBUG')?'':define('DEBUG',TRUE);
 date_default_timezone_set("HongKong");
