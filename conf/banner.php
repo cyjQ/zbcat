@@ -1,10 +1,10 @@
 <?php
 return array(
     'Banner'=>array(
-        array('id'=>1,'name'=>'首页'),
-        array('id'=>3,'name'=>'广场'),
-        array('id'=>2,'name'=>'个人中心'),
-        array('id'=>6,'name'=>'关于我们'),
+        array('id'=>1,'name'=>'首页','url'=>'./'),
+        array('id'=>3,'name'=>'广场','url'=>'#'),
+        array('id'=>2,'name'=>'个人中心','url'=>'#'),
+        array('id'=>6,'name'=>'关于我们','url'=>'#'),
     ),
     'Text_message'=>array(
         '简单实用',
