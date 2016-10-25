@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>抓宝猫财务管家</title>
-    <link href="{$__PLUGIN__}/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <script src="{$__PUBLIC__}/js/jquery-3.1.1.min.js"></script>
+    <link href="{$__PLUGIN__}/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <script src="{$__PLUGIN__}/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="{$__PLUGIN__}/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
     <link href="{$__CSS__}/style.css" rel="stylesheet">

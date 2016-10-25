@@ -9,6 +9,10 @@
                 <div class="form-div">
                     <form method="post" id="registerForm">
                         <div class="form-group">
+                            <label for="email">用户名：*</label>
+                            <input type="text" class="form-control" name="username">
+                        </div>
+                        <div class="form-group">
                             <label for="email">邮箱：*</label>
                             <input type="text" class="form-control" name="email">
                         </div>
@@ -72,6 +76,13 @@
                     }
                 }
             },
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: '用户名是必填项'
+                    }
+                }
+            },
             pwd: {
                 validators: {
                     notEmpty: {
@@ -105,17 +116,8 @@
         e.preventDefault();
         var $form = $(e.target);
         var bv = $form.data('bootstrapValidator');
-        $.post("/Account/Register", $form.serialize(), function (data) {
+        $.post("./?m=user&c=register_handler", $form.serialize(), function (data) {
             console.log(data)
-            if (data.Status == "ok") {
-                window.location.href = "/Home/Index";
-            }
-            else if (data.Status == "error") {
-                alert(data.Message);
-            }
-            else {
-                alert("未知错误");
-            }
         });
     });
 </script>
