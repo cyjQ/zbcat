@@ -332,7 +332,7 @@ class Model{
                                     if($k == count($val[1])){
                                         $this->options['where'] .=$key." ".strtoupper($logic)." '".$v."') ".$condition['_logic']." ";
                                     }else{
-                                        $this->options['where'] .=key." ".strtoupper($logic)." '".$v."' ".$val[2]." ";
+                                        $this->options['where'] .=$key." ".strtoupper($logic)." '".$v."' ".$val[2]." ";
                                     }
                                 }
                             }
