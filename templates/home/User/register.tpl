@@ -1,33 +1,59 @@
 {include file="Public/header.tpl" title=foo}
 <div class="container">
     <div class="row register-row">
-        <div class="col-sm-6 register-div">
-            <div class="register-text">
-                CREATE AN ACCOUNT
-            </div>
-            <div class="form-div">
-                <form method="post" id="registerForm">
-                    <div class="form-group">
-                        <label for="email">邮箱：*</label>
-                        <input type="text" class="form-control" name="email">
+        <div class="col-sm-6">
+            <div class="register-div">
+                <div class="register-text">
+                    CREATE AN ACCOUNT
+                </div>
+                <div class="form-div">
+                    <form method="post" id="registerForm">
+                        <div class="form-group">
+                            <label for="email">邮箱：*</label>
+                            <input type="text" class="form-control" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="passwd">密码：*</label>
+                            <input type="password" class="form-control" name="pwd">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">确认密码：*</label>
+                            <input type="password" class="form-control" name="repwd">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-default btn-lg register-btn" style="width: 100%;">Register Now!</button>
+                        </div>
+                    </form>
+                </div>
+           </div>
+
+     </div>
+        <div class="col-sm-6 register-div-right">
+            <nav class="navbar navbar-default login-nav" role="navigation">
+                <div class="navbar-header" style="position: absolute;top:-300px;right:-30px;">
+                    <button type="button" class="navbar-toggle nav-batton" data-toggle="collapse" data-target="#data-register-right" style="width: 40px;" id="chang-login-div">
+                        已有账号<br/>？
+                    </button>
+                </div>
+                <div class=" collapse navbar-collapse" id="data-register-right">
+                    <div class="register-login-div row">
+                        <div class="col-sm-12" style="text-align: center;margin-bottom: 10px;">
+                            已有账号？
+                        </div>
+                        <div class="col-sm-12">
+                            <a class="btn btn-default btn-lg" style="background: #90B75A;color: #fff;">马上登陆</a>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="passwd">密码：*</label>
-                        <input type="password" class="form-control" name="pwd">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">确认密码：*</label>
-                        <input type="password" class="form-control" name="repwd">
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-default btn-lg register-btn" style="width: 100%;">Register Now!</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </nav>
         </div>
     </div>
 </div>
 <script>
+    $('#chang-login-div').click(function(){
+        $('.register-login-div').prop('class','postion-absolute');
+
+    })
     $('#registerForm').bootstrapValidator({
         message: '这个值没有被验证',
         feedbackIcons: {

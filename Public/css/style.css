@@ -31,6 +31,9 @@
     font-size: 12px;
     color: #fff;
 }
+.nav-nav .email a:hover{
+    cursor: pointer;
+}
 .nav-nav .email a img{
     margin-bottom: 3px;
 }
@@ -81,8 +84,7 @@
     position: relative;
     display: block;
     float: none;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
 }
 .register-row{
     padding-top: 40px;
@@ -115,4 +117,27 @@
 .register-btn{
     background: #90B75A;
     color: #fff;
+}
+.register-div-right{
+    height: 320px;
+}
+.register-login-div{
+    border:1px solid #CFD9D8;
+    width: 150px;
+    height: 200px;
+    padding-top: 40px;
+    margin-top: 50px;
+}
+.login-nav{
+    border: none;
+}
+.postion-absolute{
+    position: absolute;
+    top:-300px;
+    right: 33px;
+    border:1px solid #CFD9D8;
+    width: 150px;
+    height: 200px;
+    padding-top: 40px;
+    background: #fff;
 }
