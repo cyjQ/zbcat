@@ -1,5 +1,5 @@
-{include file="Public/header.tpl" title=foo}
-<link href="{$__CSS__}/style.css" rel="stylesheet">
+<{include file="Public/header.tpl" title=foo}>
+<link href="<{$__CSS__}>/style.css" rel="stylesheet">
 <div class="container body-div" style="background: url('{$__IMG__}home/left_backimg.png')">
     <div class="row">
         <div class="col-sm-12 text-message">Learning to Live</div>
@@ -16,4 +16,4 @@
 
     </div>
 </div>
-{include file="Public/footer.tpl" title=foo}
+<{include file="Public/footer.tpl" title=foo}>
