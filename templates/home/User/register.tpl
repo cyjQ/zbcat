@@ -45,7 +45,7 @@
                             已有账号？
                         </div>
                         <div class="col-sm-12">
-                            <a class="btn btn-default btn-lg" style="background: #90B75A;color: #fff;">马上登陆</a>
+                            <a class="btn btn-default btn-lg" style="background: #90B75A;color: #fff;" href="./?m=user&c=login">马上登陆</a>
                         </div>
                     </div>
                 </div>
@@ -80,6 +80,11 @@
                 validators: {
                     notEmpty: {
                         message: '用户名是必填项'
+                    },
+                    stringLength: {
+                        min: 2,
+                        max: 7,
+                        message: '用户名长度在2到7个字符之间'
                     }
                 }
             },

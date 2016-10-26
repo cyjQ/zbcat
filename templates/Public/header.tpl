@@ -10,6 +10,8 @@
     <link href="<{$__PLUGIN__}>/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <script src="<{$__PLUGIN__}>/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="<{$__PLUGIN__}>/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
+    <script src="<{$__PLUGIN__}>/clockpicker/dist/bootstrap-clockpicker.min.js"></script>
+    <link href="<{$__PLUGIN__}>/clockpicker/dist/bootstrap-clockpicker.min.css" rel="stylesheet">
     <script src="<{$__PLUGIN__}>/layer/layer.min.js"></script>
     <link href="<{$__CSS__}>/style.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -23,15 +25,26 @@
     <div class="row top-header">&nbsp;</div>
     <div class="row">
         <div class="col-sm-4"><img src="<{$__IMG__}>home/comiis_logo.gif"/></div>
-        <div class="col-sm-8">
+        <div class="col-sm-5">
             <div class="row">
-                <div class="col-sm-12 col-sm-offset-1" style="padding-top: 10px;">
+                <div class="col-sm-12 col-sm-offset-1" style="padding-top: 10px;width: 405px;">
                     <{foreach $text_message as $vo}>
                     <div class="youshi-detail-text">
                         <div style="height: 10px;width: 10px;"></div>
                         <{$vo}>
                     </div>
                     <{/foreach}>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 user-div" style="height: 60px;padding: 0px;">
+            <div class="user-avater">
+                <img src="<{$__IMG__}>home/noavatar_small.gif">
+            </div>
+            <div class="user-name">
+                <div style="height: 48%">欢迎你：<span class="name">游客游客游客游</span> | <a href="#"> 退出 </a></div>
+                <div style="height: 48%">
+                    2016.10.26
                 </div>
             </div>
         </div>

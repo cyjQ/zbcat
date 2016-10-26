@@ -80,7 +80,7 @@
 }
 .register-div{
     width: 320px;
-    height: 370px;
+    height: 465px;
     position: relative;
     display: block;
     float: none;
@@ -143,4 +143,22 @@
     padding-top: 40px;
     background: #fff;
     z-index: 99;
+}
+.user-avater{
+    width: 50px;
+    float: left;
+    margin-left: 15px;
+}
+.user-name{
+    margin-left: 5px;
+    float:left;
+    width: 220px;
+    padding-top: 5px;
+}
+.user-name div{
+    font-size: 12px;
+}
+.user-name div .name{
+    font-size: 12px;
+    color:#9acfea;
 }
