@@ -52,3 +52,10 @@ where 条件语句逻辑参数传递错误，'notbetween'不合法 2016-08-20 22
 /var/www/zbcat/app/controller/group/Index.class.php不存在 2016-08-24 23:04:57
 c分组名不存在！ 2016-08-24 23:38:05
 /var/www/zbcat/app/controller/home/Login.class.php不存在 2016-08-25 23:41:28
+用户名不能为空 2016-10-26 09:27:18
+验证规则错误,"requires"此验证规则不支持 2016-10-26 09:30:20
+密码必填，且必须是6-16位长度 2016-10-26 09:42:27
+密码必填，且必须是6-16位长度 2016-10-26 10:18:21
+邮箱必填，且格式需正确 2016-10-26 10:54:23
+ 2016-10-26 11:11:05
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) 2016-10-26 11:12:28

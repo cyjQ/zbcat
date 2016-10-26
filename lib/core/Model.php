@@ -103,9 +103,9 @@ class Model{
 		$sql = '';
 		switch ($this->active){
 			case 'add':
-				$sql = 'insert into '.$this->table;
+				$sql = 'insert into '.$this->true_tableName;
 				$coulms = array_keys($data);
-				$coulms = $this->splid_coulms($coulms);
+				$coulms = "(".$this->splid_coulms($coulms).")";
 				if($coulms){
 					$sql .= ' '.$coulms.' values(';
 				}
@@ -117,6 +117,7 @@ class Model{
 						$sql .= "'".$v."',";
 					}
 				}
+				break;
 			case 'upd':
 				$sql = 'update '.$this->true_tableName.' set ';
 				foreach ($data as $key =>$val){
@@ -191,6 +192,39 @@ class Model{
                 return false;
             }
 
+
+    }
+
+    /*
+     * 添加数据
+     */
+
+    public function add($data){
+        if(!is_array($data)) {
+            $this->err = __FUNCTION__ . 'need a array param,string give';
+            if (DEBUG) {
+                echo $this->err;
+            }
+            errlog($this->err);
+            return false;
+        }
+        $this->active = 'add';
+        $this->sql = $this->last_sql = $this->autoSql($data);
+        try{
+            $in = $this->db->link->exec($this->sql);
+            if($in){
+                return $in;
+            }else{
+                return false;
+            }
+        }catch (PDOException $e){
+            if(DEBUG){
+                echo $e->errorInfo;
+            }
+            $this->err = $e->errorInfo;
+            errlog($this->err);
+            return false;
+        }
 
     }
 

@@ -67,19 +67,19 @@
                     //传参验证
                     if(is_array($validate)){
                         if(in_array($validate[0],self::getIns()->rule)){
-                            if(function_exists(self::getIns()->$validate[0])){
-                                $res = self::getIns()->$validate[0]($validate[1]);
-                                if(!$res){
-                                    self::getIns()->err['code'] = 2;
-                                    if(isset($data[2])){
-                                        self::getIns()->err['msg']= $data[2];
-                                    }else{
-                                        self::getIns()->err['msg']= "'".self::getIns()->validate_data."'验证未通过";
-                                    }
-                                    errlog(self::getIns()->err['msg']);
-                                    return false;
+                            $method = 'vd_'.$validate[0];
+                            $res = self::getIns()->$method($validate[1]);
+                            if(!$res){
+                                self::getIns()->err['code'] = 2;
+                                if(isset($data[2])){
+                                    self::getIns()->err['msg']= $data[2];
+                                }else{
+                                    self::getIns()->err['msg']= "'".self::getIns()->validate_data."'验证未通过";
                                 }
+                                errlog(self::getIns()->err['msg']);
+                                return false;
                             }
+
                         }else{
                             self::getIns()->err['code'] = 3;
                             self::getIns()->err['msg'] = '验证规则错误,"'.$validate[0].'"此验证规则不支持';
@@ -100,7 +100,8 @@
                             }
                             return false;
                         }
-                        $res = self::getIns()->$validate();
+                        $method = 'vd_'.$validate;
+                        $res = self::getIns()->$method();
                         if(!$res){
                             self::getIns()->err['code'] = 2;
                             if(isset($data[2])){
@@ -124,7 +125,8 @@
                     }
                     return false;
                 }
-               $res =  self::getIns()->$data[1]();
+                $method = 'vd_'.$data[1];
+               $res =  self::getIns()->$method();
                 if(!$res){
                     self::getIns()->err['code'] = 2;
                     if(isset($data[2])){

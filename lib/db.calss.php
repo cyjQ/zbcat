@@ -43,9 +43,12 @@
                 if($pdo){
                     $this->link = $pdo;
                 }
-            }
-			catch (PDOException $e){
-                $this->err = $e->errorInfo;
+            }catch (PDOException $e){
+                $this->err = $e->getMessage();
+                if(DEBUG){
+                    echo $this->err;
+                }
+                errlog($this->err);
             }
 
 		}

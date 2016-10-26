@@ -2,7 +2,7 @@
 	return array(
 		'dbhost'       => 'localhost',
 		'dbuser'       => 'root',
-		'dbpwd'        => '123456',
+		'dbpwd'        => '',
 		'character'    => 'utf8',
 		'dbname'       => 'zbcat',
         'table_prefix' => 'zb_',
