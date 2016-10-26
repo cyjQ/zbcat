@@ -1,6 +1,6 @@
 <{include file="Public/header.tpl" title=foo}>
 <link href="<{$__CSS__}>/style.css" rel="stylesheet">
-<div class="container body-div" style="background: url('{$__IMG__}home/left_backimg.png')">
+<div class="container body-div" style="background: url('<{$__IMG__}>home/left_backimg.png')">
     <div class="row">
         <div class="col-sm-12 text-message">Learning to Live</div>
         <div class="col-sm-12 text-message">To learn how to manage money</div>
