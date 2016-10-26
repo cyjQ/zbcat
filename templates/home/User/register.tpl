@@ -121,6 +121,8 @@
             data = $.parseJSON(data);
             if(data.code ==0){
                 layer.msg(data.msg,{icon:1});
+            }else{
+                layer.msg(data.msg,{icon:2});
             }
         });
     });
