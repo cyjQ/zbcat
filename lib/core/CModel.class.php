@@ -8,6 +8,8 @@ class CModel{
      */
     protected function __construct(){
         $this->smarty = new Smarty();
+        $this->smarty->left_delimiter = '<{';
+        $this->smarty->right_delimiter = '}>';
         $this->__PUBLIC__ = __PUBLIC__;
         $this->ROOT_DIR   = ROOT_DIR;
         $this->__CSS__    = __CSS__;

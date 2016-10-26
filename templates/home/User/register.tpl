@@ -1,4 +1,4 @@
-{include file="Public/header.tpl" title=foo}
+<{include file="Public/header.tpl" title=foo}>
 <div class="container">
     <div class="row register-row">
         <div class="col-sm-6">
@@ -117,8 +117,12 @@
         var $form = $(e.target);
         var bv = $form.data('bootstrapValidator');
         $.post("./?m=user&c=register_handler", $form.serialize(), function (data) {
-            console.log(data)
+            console.log($.parseJSON(data));
+            data = $.parseJSON(data);
+            if(data.code ==0){
+                layer.msg(data.msg,{icon:1});
+            }
         });
     });
 </script>
-{include file="Public/footer.tpl" title=foo}
+<{include file="Public/footer.tpl" title=foo}>

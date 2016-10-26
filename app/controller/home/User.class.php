@@ -32,4 +32,8 @@ class User extends CModel {
             }
         }
     }
+
+    public function login(){
+        $this->display();
+    }
 }
