@@ -39,7 +39,7 @@
         </div>
         <div class="col-sm-3 user-div" style="height: 60px;padding: 0px;">
             <div class="user-avater">
-                <img src="<{$__IMG__}>home/noavatar_small.gif">
+                <img src="<{$__IMG__}>home/noavatar_small.gif" class="img-responsive">
             </div>
             <div class="user-name">
                 <div style="height: 48%">欢迎你：<span class="name">游客游客游客游</span> | <a href="#"> 退出 </a></div>
