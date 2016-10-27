@@ -1,10 +1,10 @@
 <?php
 defined("ROOT_DIR")?"":define("ROOT_DIR", str_replace("ini.php","",str_replace("\\",DIRECTORY_SEPARATOR,__FILE__)));
-session_start();
 include ROOT_DIR."lib".DIRECTORY_SEPARATOR."function.php";
 defined("CONFIG_PATH")?'':define('CONFIG_PATH',ROOT_DIR.'conf');
 //加载lib目录文件
 load(ROOT_DIR.'lib',1);
+Session::init();
 defined('__PUBLIC__')?'':define('__PUBLIC__','/Public'.'/');
 defined('__JS__')?'':define('__JS__',__PUBLIC__.'js'.DIRECTORY_SEPARATOR);
 defined('__CSS__')?'':define('__CSS__',__PUBLIC__.'css'.DIRECTORY_SEPARATOR);

@@ -23,6 +23,8 @@ class User extends CModel {
             exit(json_encode(Validator::getIns()->getError()));
         }else{
             $data['pwd'] = md5($data['pwd']);
+            $data['create_time'] = time();
+            $data['IP'] = $_SERVER['REMOTE_ADDR'];
             $user = D('user');
             $res = $user->add($data);
             if($res){
@@ -35,5 +37,25 @@ class User extends CModel {
 
     public function login(){
         $this->display();
+    }
+    public function login_handler(){
+        $filter = array('trim','htmlentities');
+        $data['pwd'] = md5(I('pwd','',$filter));
+        $data['email'] = I('email','',$filter);
+        $user = D('user');
+        $res = $user->where($data)->find();
+        if($res){
+            if($res['pwd'] == $data['pwd']  && $res['email']  == $data['email']){
+                session('login_ip',$_SERVER['REMOTE_ADDR']);
+                session('id',$res['id']);
+                session('username',$res['username']);
+                exit(json_encode(array('code'=>0,'msg'=>'登录成功')));
+            }else{
+                exit(json_encode(array('code'=>2,'msg'=>'用户名或密码错误')));
+            }
+        }else{
+            exit(json_encode(array('code'=>1,'msg'=>'用户名或密码错误')));
+        }
+
     }
 }
