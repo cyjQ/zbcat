@@ -85,3 +85,8 @@ SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password
 用户名不能为空 2016-10-27 16:50:05
 邮箱必填，且格式需正确 2016-10-27 16:55:42
 用户名不能为空 2016-10-27 16:56:22
+C:\wamp\www\zbcat\app/controller/home\userc=ucenter.class.php不存在 2016-10-28 13:37:55
+C:\wamp\www\zbcat\app/controller/home\userc=ucenter.class.php不存在 2016-10-28 13:38:05
+C:\wamp\www\zbcat\app/controller/home\userc=ucenter.class.php不存在 2016-10-28 13:38:07
+C:\wamp\www\zbcat\app/controller/home\userc=ucenter.class.php不存在 2016-10-28 13:38:32
+C:\wamp\www\zbcat\app/controller/home\userc=ucenter.class.php不存在 2016-10-28 13:52:38

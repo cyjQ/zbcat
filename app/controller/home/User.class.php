@@ -71,4 +71,8 @@ class User extends CModel {
     public function success_register(){
         $this->display();
     }
+
+    public function ucenter(){
+        $this->display();
+    }
 }
