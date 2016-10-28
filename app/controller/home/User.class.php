@@ -8,6 +8,9 @@ class User extends CModel {
         $this->display();
     }
 
+    /*
+     * 用户注册处理
+     */
     public function register_handler(){
         $filter = array('trim','htmlentities');
         $data['username']=  I('username','',$filter);
@@ -38,6 +41,9 @@ class User extends CModel {
     public function login(){
         $this->display();
     }
+    /*
+     * 用户登录处理
+     */
     public function login_handler(){
         $filter = array('trim','htmlentities');
         $data['pwd'] = md5(I('pwd','',$filter));
@@ -57,5 +63,12 @@ class User extends CModel {
             exit(json_encode(array('code'=>1,'msg'=>'用户名或密码错误')));
         }
 
+    }
+
+    /*
+     * 注册成功页面
+     */
+    public function success_register(){
+        $this->display();
     }
 }
