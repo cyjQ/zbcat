@@ -13,6 +13,7 @@
     <script src="<{$__PLUGIN__}>/clockpicker/dist/bootstrap-clockpicker.min.js"></script>
     <link href="<{$__PLUGIN__}>/clockpicker/dist/bootstrap-clockpicker.min.css" rel="stylesheet">
     <script src="<{$__PLUGIN__}>/layer/layer.min.js"></script>
+    <script src="<{$__PUBLIC__}>/js/jquery.sticky.elements.js"></script>
     <link href="<{$__CSS__}>/style.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -53,7 +54,7 @@
 <div class="container">
     <nav class="navbar navbar-default nav-nav" role="navigation">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle nav-batton" data-toggle="collapse" data-target="#example-navbar-collapse">
+            <button type="button" class="navbar-toggle nav-batton" data-toggle="collapse" data-target="#example-navbar-collapse" >
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
