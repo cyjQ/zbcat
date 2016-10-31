@@ -1,40 +1,68 @@
 <{include file="Public/header.tpl"}>
 <div class="container">
     <div class="row">
-        <nav class="navbar navbar-default login-nav" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle nav-batton" data-toggle="collapse" id="user-change" data-target="#user-nav" style="background: #fff;border: none;">
-                    <span class="glyphicon glyphicon-chevron-up" id="user-nav-zs"></span>
-                </button>
+        <{include file="home/User/left.tpl"}>
+        <div class="col-sm-9" style="padding-top: 0px;">
+            <div class="container" style="width: 100%";>
+                <div class="row">
+                    <div class="col-sm-3 user-avater-div">
+                        <img src="<{$__IMG__}>home/noavatar_small.gif">
+                    </div>
+                    <div class="col-sm-9" style="height: 160px;">
+                        <div class="container" style="width: 100%">
+                            <div class="row">
+                                <div class="col-sm-12" style="padding: 0px;">
+                                    <span class="center-user-name">飘逝的雪花</span>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="ucenter-info">注册时间：2016-9-54</div>
+                                <div class="ucenter-info">上次登录时间：2016-9-54</div>
+                            </div>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="ucenter-info">本次登录IP：2016-9-54</div>
+                                <div class="ucenter-info">上次登录时间：2016-9-54</div>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <a class="btn btn-info btn-default" style="width: 90px;"><span class="glyphicon glyphicon-open">上传头像</span> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row user-info-div" style="height:auto;border-top:2px dotted #d5d5d5;border-bottom: 2px dotted #d5d5d5;padding-bottom: 20px;">
+                    <h4>其他信息</h4>
+                    <div class="col-lg-6 col-lg-offset-1">
+                        <div class="form-group form-inline user-info-input" >
+                            <label for="email" class="col-sm-4">电子邮箱：</label>
+                            <input type="text" name="email">
+                        </div>
+                        <div class="form-group form-inline user-info-input" >
+                            <label for="email" class="col-sm-4">手机：</label>
+                            <input type="text" name="phone">
+                        </div>
+                        <div class="form-group form-inline user-info-input">
+                            <label for="email" class="col-sm-4">电子邮箱：</label>
+                            <input type="text" name="email">
+                        </div>
+                        <div class="form-group form-inline user-info-input">
+                            <label for="email" class="col-sm-4">生日：</label>
+                            <input type="date" name="birthday">
+                        </div>
+                        <div class="form-group form-inline user-info-input">
+                            <label for="email" class="col-sm-4">居住地：</label>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-lg-offset-1">
+                        <button class="btn  btn-info" style="margin:20px 0px;">保存</button>
+                    </div>
+                </div>
+
+
             </div>
-            <div class="col-sm-3 collapse navbar-collapse" style="width: auto;border:none" id="user-nav">
-                <div class="user-nav-p">
-                    <div class="user-nav-left-header"><span class="glyphicon glyphicon-user"></span> 个人信息 &nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></div>
-                    <ul class="nav nav-pills nav-stacked user-nav-left-ul">
-                        <li><a href="#">个人资料</a></li>
-                        <li><a href="#">修改密码</a></li>
-                    </ul>
-                </div>
-                <div class="user-nav-p">
-                    <div class="user-nav-left-header"><span class="glyphicon glyphicon-list-alt"></span> 记账信息 &nbsp;&nbsp;<span class="glyphicon glyphicon-minus"></span> </div>
-                    <ul class="nav nav-pills nav-stacked user-nav-left-ul">
-                        <li><a href="#">添加账单</a></li>
-                        <li><a href="#">总账概况</a></li>
-                        <li><a href="#">总账概况</a></li>
-                        <li><a href="#">记账科目</a></li>
-                    </ul>
-                </div>
-                <div class="user-nav-p">
-                    <div class="user-nav-left-header"><span class="glyphicon glyphicon-home"></span> 社区信息 &nbsp;&nbsp;<span class="glyphicon glyphicon-minus"></span></div>
-                    <ul class="nav nav-pills nav-stacked user-nav-left-ul">
-                        <li><a href="#">添加账单</a></li>
-                        <li><a href="#">收入明细</a></li>
-                        <li><a href="#">支出明细</a></li>
-                        <li><a href="#">记账科目</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        </div>
     </div>
 </div>
 <script>

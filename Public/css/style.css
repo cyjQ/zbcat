@@ -296,4 +296,31 @@
     background: #fff;
     overflow: auto;
     border-radius: 50px;
+    z-index: 99;
+}
+.user-avater-div{
+    width: auto;
+    height: 160px;
+    padding:0px;
+    text-align: center;
+}
+.user-avater-div img{
+    width: 150px;
+}
+.center-user-name{
+    font-size: 20px;
+    color:#8a6d3b;
+}
+.ucenter-info{
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    width: 50%;
+    float: left;
+}
+.user-info-div  input{
+    border:0px;
+    outline: none;
+    border-bottom: 1px solid #5cb85c;
+    text-align: right;
 }
