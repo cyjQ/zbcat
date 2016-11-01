@@ -318,8 +318,8 @@
     width: 50%;
     float: left;
 }
-.user-info-div  input{
-    border:0px;
+.user-info-div  input {
+    border: 0px;
     outline: none;
     border-bottom: 1px solid #5cb85c;
     text-align: right;

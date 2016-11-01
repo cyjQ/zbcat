@@ -537,7 +537,6 @@ jQuery.extend({
 	// arguments.
 	proxy: function( fn, context ) {
 		var args, proxy, tmp;
-
 		if ( typeof context === "string" ) {
 			tmp = fn[ context ];
 			context = fn;

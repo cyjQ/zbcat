@@ -48,7 +48,7 @@ class Router{
             $args = $this->explode_query_string($request_args);*/
             $args = $this->request_info;
             if(isset($args['m'])){
-                $this->model = $args['m'];
+                $this->model = ucfirst($args['m']);
             }else{
                 $this->model ="Index";
             }

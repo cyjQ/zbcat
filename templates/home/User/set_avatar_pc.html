@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="/Public/plugin/cropper/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Public/plugin/cropper/dist/cropper.min.css">
+<script src="/Public/plugin/cropper/assets/js/jquery.min.js"></script>
+<script src="/Public/plugin/cropper/assets/js/bootstrap.min.js"></script>
+<script src="/Public/plugin/cropper/dist/cropper.js"></script>
+<div style="width: 400px;height:300px;">
+<img src="/Public/img/home/back.png" style="width: 400px;height:300px;" id="avatar_img"/>
+</div>
+<div class="col-sm-6">
+    <h3 class="page-header">Preview</h3>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="preview"></div>
+        </div>
+        <div class="col-sm-4">
+            <div class="preview"></div>
+        </div>
+        <div class="col-sm-2">
+            <div class="preview"></div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var $previews = $('.preview');
+
+        $('#avatar_img').cropper({
+            build: function (e) {
+                var $clone = $(this).clone();
+                $clone.css({
+                    display: 'block',
+                    width: '100%',
+                    minWidth: 0,
+                    minHeight: 0,
+                    maxWidth: 'none',
+                    maxHeight: 'none'
+                });
+
+                $previews.css({
+                    width: '100%',
+                    overflow: 'hidden'
+                }).html($clone);
+            },
+
+            crop: function (e) {
+                var imageData = $(this).cropper('getImageData');
+                var previewAspectRatio = e.width / e.height;
+                $previews.each(function () {
+                    var $preview = $(this);
+                    var previewWidth = $preview.width();
+                    var previewHeight = previewWidth / previewAspectRatio;
+                    var imageScaledRatio = e.width / previewWidth;
+
+                    $preview.height(previewHeight).find('img').css({
+                        width: imageData.naturalWidth / imageScaledRatio,
+                        height: imageData.naturalHeight / imageScaledRatio,
+                        marginLeft: -e.x / imageScaledRatio,
+                        marginTop: -e.y / imageScaledRatio
+                    });
+                });
+            },
+        });
+    });
+</script>

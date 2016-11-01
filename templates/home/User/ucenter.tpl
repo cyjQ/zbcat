@@ -24,7 +24,8 @@
                                 <div class="ucenter-info">上次登录时间：2016-9-54</div>
                             </div>
                             <div class="row" style="margin-top: 20px;">
-                                <a class="btn btn-info btn-default" style="width: 90px;"><span class="glyphicon glyphicon-open">上传头像</span> </a>
+                                <a class="btn btn-info btn-default visible-xs" style="width: 90px;" id="set-avatar-ph"><span class="glyphicon glyphicon-open">上传头像</span> </a>
+                                <a class="btn btn-info btn-default hidden-xs" style="width: 90px;" id="set-avatar-pc"><span class="glyphicon glyphicon-open">上传头像</span> </a>
                             </div>
                         </div>
                     </div>
@@ -50,6 +51,9 @@
                         </div>
                         <div class="form-group form-inline user-info-input">
                             <label for="email" class="col-sm-4">居住地：</label>
+                            <select>
+                                <option>省</option>
+                            </select>
 
                         </div>
                     </div>
@@ -148,5 +152,17 @@
             $('#user-change').css('top',$(window).height()-parseInt($('#user-change').css('height')));
             $('#user-change').css('left',($(window).width()-parseInt($('#user-change').css('width')))/2);
         }
+    });
+    $('#set-avatar-pc').click(function(){
+        layer.open({
+            type:2,
+            title:'头像设置',
+            area:['800px','500px'],
+            content:['./templates/home/User/set_avatar_pc.html','no'],
+            shift: 2,
+        });
+    });
+    $('#set-avatar-ph').click(function(){
+
     });
 </script>
