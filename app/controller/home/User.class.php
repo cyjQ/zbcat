@@ -73,6 +73,18 @@ class User extends CModel {
     }
 
     public function ucenter(){
+        $file = File::getIns();
         $this->display();
+    }
+
+    public function set_avatar_pc(){
+        $this->display();
+    }
+
+    public function set_avatar(){
+        $res = File::getIns()->upload();
+        if($res){
+            var_dump(Image::getIns($res)->getImgInfo());
+        }
     }
 }

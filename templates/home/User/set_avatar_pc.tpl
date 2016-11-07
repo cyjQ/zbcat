@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="/Public/plugin/cropper/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/Public/plugin/cropper/dist/cropper.min.css">
-<script src="/Public/plugin/cropper/assets/js/jquery.min.js"></script>
-<script src="/Public/plugin/cropper/assets/js/bootstrap.min.js"></script>
-<script src="/Public/plugin/cropper/dist/cropper.js"></script>
+<link rel="stylesheet" href="<{$__PLUGIN__}>/cropper/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="<{$__PLUGIN__}>/cropper/dist/cropper.min.css">
+<script src="<{$__PLUGIN__}>/cropper/assets/js/jquery.min.js"></script>
+<script src="<{$__PLUGIN__}>/cropper/assets/js/bootstrap.min.js"></script>
+<script src="<{$__PLUGIN__}>/cropper/dist/cropper.js"></script>
 <style>
     .img-handler-btn{
         background: #78B658;
@@ -13,8 +13,14 @@
         -khtml-opacity: 0.5;
         opacity: 0;
         position: absolute;
-        top:325px;
-        left: 16px;
+        top:318px;
+        left: 14px;
+        width: 97px;
+        height:37px;
+        margin:0;
+    }
+    #confirm-up{
+        background: #00b3ee;
     }
 </style>
 <div class="container">
@@ -24,18 +30,28 @@
                 <img src="" style="width: 400px;height:300px;" id="avatar_img"/>
             </div>
             <br/>
-            <input type="file" id="file-avatar">
-            <button class="btn img-handler-btn btn-info" id="img-rotate"><span class="glyphicon glyphicon-open"></span>选择图片</button>
+            <form enctype="multipart/form-data" method="post" id="avatar-form">
+                <input type="file" id="file-avatar" name="avatar">
+                <button class="btn img-handler-btn btn-info" id="img-rotate"><span class="glyphicon glyphicon-open"></span>选择图片</button>
+                <a class="btn img-handler-btn btn-info" id="confirm-up">确认上传</a>
+                &nbsp;&nbsp;
+                <input type="hidden" name="x" id="x">
+                <input type="hidden" name="y" id="y">
+                <input type="hidden" name="width" id="width">
+                <input type="hidden" name="height" id="height">
+            </form>
+
         </div>
         <div class="col-sm-3">
             <div class="preview">
-
+aa
             </div>
         </div>
     </div>
 
 </div>
 <script>
+    var data = null
     $('#file-avatar').change(function(){
         $('#avatar_img').prop('src',PreviewImage(this));
         crop();
@@ -64,6 +80,7 @@
 
             crop: function (e) {
                 console.log(e);
+                data = e;
                 var imageData = $(this).cropper('getImageData');
                 var previewAspectRatio = e.width / e.height;
                 $previews.each(function () {
@@ -86,7 +103,27 @@
             minCanvasHeight:300
         });
     }
-    $('#img-rotate').click(function(){
+
+    //保存头像
+    $('#confirm-up').click(function () {
+        if(data === null && $('#avatar_img').val()==''){
+            alert('请选择一张图片');
+        }
+        $('#x').val(data.x);
+        $('#y').val(data.y);
+        $('#width').val(data.width);
+        $('#height').val(data.height);
+        $.ajax({
+            url: './?m=user&c=set_avatar',
+            type: 'POST',
+            cache: false,
+            data: new FormData($('#avatar-form')[0]),
+            contentType: false,
+            processData: false,
+            success:function(e){
+                alert(e);
+            }
+        })
 
     });
 
@@ -96,13 +133,13 @@
         var browserVersion = window.navigator.userAgent.toUpperCase();
         var img_url ='';
         if (allowExtention.indexOf(extention) > -1) {
-            if (fileObj.files) {//HTML5实现预览，兼容chrome、火狐7+等
+            if (fileObj.files) {     //HTML5实现预览，兼容chrome、火狐7+等
                 img_url = URL.createObjectURL(fileObj.files[0]);
                 return  img_url;
             } else if (browserVersion.indexOf("MSIE") > -1) {
-                if (browserVersion.indexOf("MSIE 6") > -1) {//ie6
+                if (browserVersion.indexOf("MSIE 6") > -1) { //ie6
                     return fileObj.value;
-                } else {//ie[7-9]
+                } else {   //ie[7-9]
                     fileObj.select();
                     if (browserVersion.indexOf("MSIE 9") > -1)
                         fileObj.blur(); //不加上document.selection.createRange().text在ie9会拒绝访问
@@ -120,11 +157,11 @@
                     tempDivPreview.parentNode.insertBefore(newPreview, tempDivPreview);
                     tempDivPreview.style.display = "none";
                 }
-            } else if (browserVersion.indexOf("FIREFOX") > -1) {//firefox
+            } else if (browserVersion.indexOf("FIREFOX") > -1) { //firefox
                 var firefoxVersion = parseFloat(browserVersion.toLowerCase().match(/firefox\/([\d.]+)/)[1]);
-                if (firefoxVersion < 7) {//firefox7以下版本
+                if (firefoxVersion < 7) { //firefox7以下版本
                     return fileObj.files[0].getAsDataURL();
-                } else {//firefox7.0+                    
+                } else { //firefox7.0+                    
                     return window.URL.createObjectURL(fileObj.files[0]);
                 }
             } else {

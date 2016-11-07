@@ -158,7 +158,7 @@
             type:2,
             title:'头像设置',
             area:['800px','500px'],
-            content:['./templates/home/User/set_avatar_pc.html','no'],
+            content:['./?m=user&c=set_avatar_pc','no'],
             shift: 2,
         });
     });
