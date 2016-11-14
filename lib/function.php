@@ -60,6 +60,9 @@
 	 */
 	function errlog($msg){
 		$string = $msg .' '.date("Y-m-d H:i:s",time()).PHP_EOL;
+        if(DEBUG){
+            echo $string;
+        }
 		file_put_contents(C('LOG_PATH').DIRECTORY_SEPARATOR.'errlog.txt',$string,FILE_APPEND);
 	}
 	/*

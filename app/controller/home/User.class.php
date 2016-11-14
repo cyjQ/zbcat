@@ -87,4 +87,8 @@ class User extends CModel {
             var_dump(Image::getIns($res)->getImgInfo());
         }
     }
+
+    public function wx_login(){
+        $wx = Wchat::getIns(C('appid'),C('secret'));
+    }
 }

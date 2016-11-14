@@ -56,11 +56,19 @@ class Image{
                 $this->imgInfo['mime'] = $imginfo['mime'];
                 $this->imgInfo['type'] = $this->compareSuffix[$imginfo[2]];
                 $this->imgInfo['mime'] = $imginfo['mime'];
+                return $this->imgInfo;
             }else{
                 $this->setErr('"'.$this->compareSuffix[$imginfo[2]].'",不允许此格式的图片',2);
                 return false;
             }
+        }else{
+            $this->setErr('"'.$this.$this->imgFile.'"不是图片文件',3);
         }
+    }
+
+
+    public function cropImg($height,$width,$srcImg,$srcx,$srcy){
+
     }
 
     protected function setErr($msg,$code){
