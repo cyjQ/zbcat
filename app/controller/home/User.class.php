@@ -73,7 +73,6 @@ class User extends CModel {
     }
 
     public function ucenter(){
-        $file = File::getIns();
         $this->display();
     }
 
@@ -84,11 +83,18 @@ class User extends CModel {
     public function set_avatar(){
         $res = File::getIns()->upload();
         if($res){
-            var_dump(Image::getIns($res)->getImgInfo());
+            //裁剪图片
+            $img = Image::getIns($res);
+            $img->cropImg($_POST['height'],$_POST['width'],$_POST['x'],$_POST['y']);
         }
     }
 
     public function wx_login(){
         $wx = Wchat::getIns(C('appid'),C('secret'));
+        if($wx->creteMenu()){
+            echo 'ok';
+        }else{
+            echo 'no';
+        }
     }
 }

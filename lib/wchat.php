@@ -6,7 +6,6 @@ class Wchat{
     protected function ini($appid,$secret){
         $this->appid = $appid;
         $this->secret = $secret;
-        $this->getAccessToken();
     }
 
     protected function __construct($appid,$secret){
@@ -49,7 +48,6 @@ class Wchat{
      */
     public function getWxIp(){
         $url = 'https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token='.$this->getAccessToken();
-        echo $url;
         $ipList = file_get_contents($url);
         $ipList = json_decode($ipList);
         if($ipList->errcode){
@@ -65,6 +63,51 @@ class Wchat{
         }
         return $ipList->ip_list;
     }
+
+    /*
+     * 创建自定义菜单
+     */
+    public function creteMenu(){
+        $menuData = jsEcode(C('menu'));
+        $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$this->getAccessToken();
+        echo $url;
+        $resut = json_decode(https_request($url,$menuData));
+        //var_dump(json_decode($resut));
+        if($resut->errcode>0){
+            errlog('createMenu Error:'.$resut->errmsg);
+            return false;
+        }
+        return true;
+    }
+
+    /*
+     * 微信开发者认证
+     */
+    public function checkSignature(){
+        // you must define TOKEN by yourself
+        define("TOKEN", C('token'));
+        if (!defined("TOKEN")) {
+            throw new Exception('TOKEN is not defined!');
+        }
+
+        $signature = $_GET["signature"];
+        $timestamp = $_GET["timestamp"];
+        $nonce = $_GET["nonce"];
+
+        $token = TOKEN;
+        $tmpArr = array($token, $timestamp, $nonce);
+        // use SORT_STRING rule
+        sort($tmpArr, SORT_STRING);
+        $tmpStr = implode( $tmpArr );
+        $tmpStr = sha1( $tmpStr );
+
+        if( $tmpStr == $signature ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 
 }

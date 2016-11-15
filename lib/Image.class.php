@@ -31,6 +31,9 @@ class Image{
     protected function __construct($file){
         $this->init($file);
     }
+    /*
+     * 获取实列对象
+     */
     public static function getIns($file){
         if(self::$ins === null){
             self::$ins = new self($file);
@@ -38,14 +41,19 @@ class Image{
         return self::$ins;
     }
 
+    /*
+     * 初始化配置
+     */
     protected function init($file){
         $this->allowType = C('ALLOW_IMG_TYPE');
         $this->imgFile = $file;
     }
-
+    /*
+     * 获取图片的信息
+     */
     public function getImgInfo(){
         if(!(is_file($this->imgFile) && file_exists($this->imgFile))){
-            $this->setErr('图片文件不存在',1);
+            $this->setErr($this->imgFile.' is not exists',1);
             return false;
         }
         $imginfo = getimagesize($this->imgFile);
@@ -58,28 +66,47 @@ class Image{
                 $this->imgInfo['mime'] = $imginfo['mime'];
                 return $this->imgInfo;
             }else{
-                $this->setErr('"'.$this->compareSuffix[$imginfo[2]].'",不允许此格式的图片',2);
+                $this->setErr('"'.$this->compareSuffix[$imginfo[2]].'",the image type is not allowed',2);
                 return false;
             }
         }else{
-            $this->setErr('"'.$this.$this->imgFile.'"不是图片文件',3);
+            $this->setErr('"'.$this.$this->imgFile.'"is not a image file',3);
         }
     }
 
 
-    public function cropImg($height,$width,$srcImg,$srcx,$srcy){
+    /*
+     * 图片的裁剪
+     */
+    public function cropImg($height,$width,$srcx,$srcy){
+        if($height<=0 || $width<=0){
+            $this->setErr('cropImg Error:the param height or width is not rightful!',4);
+            return false;
+        }
+        $imgInfo = $this->getImgInfo();
+        $imFunc = 'imagecreatefrom'.$imgInfo['type'];
+        $im =  imagecreatetruecolor($width,$height);
+        if(function_exists($imFunc)){
+            $imSrc = $imFunc($this->imgFile);
+        }else{
+            errlog('function '.$imFunc.' is not exists');
+            return false;
+        }
 
     }
 
+    /*
+     * 设置错误消息
+     */
     protected function setErr($msg,$code){
         $this->err['msg'] = $msg;
         $this->err['code'] = $code;
-        if(DEBUG){
-            echo $this->err['msg'];
-        }
         errlog($this->err['msg']);
     }
 
+    /*
+     * 获取错误消息
+     */
     public function getErr(){
         return $this->err;
     }

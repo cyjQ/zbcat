@@ -191,6 +191,62 @@
 		return $data;
 	}
 
+	/*
+	 * https请求
+	 */
+	function https_request($url,$args){
+	    if(trim($url) == ''){
+	        error_log('https request error,the url is required');
+            return false;
+        }
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+        if (!empty($args)){
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $args);
+        }
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($curl);
+        curl_close($curl);
+        return $output;
+    }
+
+    /*
+     * 将数组转换为json格式字符串
+     */
+    function jsEcode($data,$is_ecode_data=false){
+        if(count($data) <=0){
+            errlog('jsEcode Error,the data is null');
+            return false;
+        }
+        if(!is_array($data)){
+            errlog('jsEcode Error,need a array,other giveing');
+            return false;
+        }
+        if($is_ecode_data){
+            return json_encode($data);
+        }
+        $enc_arr = enc_val($data);
+        $jsdata = json_encode($data);
+        foreach ($enc_arr as $key=>$val){
+            $jsdata = str_replace($key,$val,$jsdata);
+        }
+        return $jsdata;
+    }
+
+    function enc_val($val){
+        static $enc_array = array();
+        if(is_array($val)){
+            array_map('enc_val',$val);
+        }else{
+            $enc_array[trim(json_encode($val),'"')] = $val;
+        }
+        return $enc_array;
+
+    }
+
 
 
 
