@@ -43,7 +43,7 @@
                 <img src="<{$__IMG__}>home/noavatar_small.gif" class="img-responsive">
             </div>
             <div class="user-name">
-                <div style="height: 48%">欢迎你：<span class="name">游客游客游客游</span> | <a href="#"> 退出 </a></div>
+                <div style="height: 48%">欢迎你：<span class="name"><{$smarty.session.username}></span> | <a href="./?m=user&c=login_out"> 退出 </a></div>
                 <div style="height: 48%">
                     2016.10.26
                 </div>

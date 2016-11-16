@@ -21,7 +21,7 @@
 			$this->dbuser    = C('dbuser');
 			$this->character = C('character');
             $this->dbtype    = C('dbtype');
-            $this->dsn ="mysql:host=$this->dbhost;dbname=$this->dbname";
+            $this->dsn ="mysql:host=$this->dbhost;dbname=$this->dbname;charset=$this->character";
 			$this->conn();
 		}
 		/*

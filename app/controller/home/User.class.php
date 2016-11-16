@@ -25,12 +25,19 @@ class User extends CModel {
         if(Validator::getIns()->getError()['code'] != 0){
             exit(json_encode(Validator::getIns()->getError()));
         }else{
+            if($data['pwd'] != $repwd){
+                exit(json_encode(array('code'=>2,'msg'=>'密码与确认密码不一致!')));
+            }
             $data['pwd'] = md5($data['pwd']);
             $data['create_time'] = time();
             $data['IP'] = $_SERVER['REMOTE_ADDR'];
             $user = D('user');
             $res = $user->add($data);
+            var_dump($res);exit;
             if($res){
+                session('login_ip',$_SERVER['REMOTE_ADDR']);
+                session('id',$res['id']);
+                session('username',$res['username']);
                 exit(json_encode(array('code'=>0,'msg'=>'注册成功')));
             }else{
                 exit(json_encode(array('code'=>1,'msg'=>'注册失败，请重试')));
@@ -41,6 +48,7 @@ class User extends CModel {
     public function login(){
         $this->display();
     }
+
     /*
      * 用户登录处理
      */
@@ -55,7 +63,7 @@ class User extends CModel {
                 session('login_ip',$_SERVER['REMOTE_ADDR']);
                 session('id',$res['id']);
                 session('username',$res['username']);
-                exit(json_encode(array('code'=>0,'msg'=>'登录成功')));
+                exit(json_encode(array('code'=>0,'msg'=>'登录成功','redirect_url'=>Session::uGoTo(false))));
             }else{
                 exit(json_encode(array('code'=>2,'msg'=>'用户名或密码错误')));
             }
@@ -72,7 +80,16 @@ class User extends CModel {
         $this->display();
     }
 
+    /*
+     * 用户中心
+     */
     public function ucenter(){
+
+        //判断用户是否登录
+        if(!(Session::is_login())){
+            $this->urlJump('login');
+            return;
+        }
         $this->display();
     }
 
@@ -80,21 +97,28 @@ class User extends CModel {
         $this->display();
     }
 
+    /*
+     * 设置用户的头像
+     */
     public function set_avatar(){
         $res = File::getIns()->upload();
         if($res){
             //裁剪图片
             $img = Image::getIns($res);
-            $img->cropImg($_POST['height'],$_POST['width'],$_POST['x'],$_POST['y']);
+            $avtar = $img->cropImg($_POST['height'],$_POST['width'],$_POST['x'],$_POST['y']);
+            if($avtar){
+                var_dump($_SESSION);
+                $user = D('user');
+
+            }
         }
     }
 
-    public function wx_login(){
-        $wx = Wchat::getIns(C('appid'),C('secret'));
-        if($wx->creteMenu()){
-            echo 'ok';
-        }else{
-            echo 'no';
-        }
+    public function login_out(){
+        session('login_ip','');
+        session('id','');
+        session('username','');
+        $this->urlJump('login');
     }
+
 }

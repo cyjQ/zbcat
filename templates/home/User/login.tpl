@@ -102,7 +102,9 @@
             console.log($.parseJSON(data));
             data = $.parseJSON(data);
             if(data.code ==0){
-                layer.msg(data.msg,{icon:1});
+                layer.msg(data.msg,{icon:1,time:1000},function () {
+                    location.href = data.redirect_url;
+                });
             }else{
                 layer.msg(data.msg,{icon:5});
             }

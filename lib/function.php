@@ -44,7 +44,7 @@
 				}
 			}
 		}elseif($load_dir == ""){
-			errlog("load err:加载配置失败，目录或文件是空的");
+			errlog("load function err:direcotry or file is null!");
 			return false;
 		}elseif(is_file($load_dir)&& file_exists($load_dir)){
 			if(!in_array($load_dir,$arr))
@@ -71,7 +71,7 @@
 	function D($table,$is_trueName=0){
 		$mode = Model::getIns();
 		if(trim($table) == ''){
-			errlog('模型名称不能为空');
+			errlog("function D error:the model name is can't null");
 			return false;
 		}
 		if($is_trueName ===0){
@@ -95,10 +95,12 @@
 	 */
 	function session($name,$value=null,$timeout=0){
 		if($value === null && trim($name) !=''){
-			return $_SESSION[$name];
+		    if(isset($_SESSION[$name]))
+			   return $_SESSION[$name];
 		}else if($value !== null && trim($name) != ''){
 			$_SESSION[$name] = $value;
 		}
+		return false;
 	}
 	/*
 	 * 获取参数

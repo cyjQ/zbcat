@@ -139,7 +139,6 @@ class Model{
 	 * 查询结果集
 	 */
 	public function select(){
-
         foreach ($this->options as $key =>$val){
             $this->sql = str_replace('%'.$key.'%'," ".$val." ",$this->sql);
         }
@@ -209,11 +208,11 @@ class Model{
             return false;
         }
         $this->active = 'add';
-        $this->sql = $this->last_sql = $this->autoSql($data);
+        $sql = $this->last_sql = $this->autoSql($data);
         try{
-            $in = $this->db->link->exec($this->sql);
+            $in = $this->db->link->exec($sql);
             if($in){
-                return $in;
+                return $this->where($data)->feilds('id')->find()['id'];
             }else{
                 return false;
             }
@@ -233,21 +232,21 @@ class Model{
      */
 
     public function delete($id=null){
-        $this->sql = 'delete from '.$this->true_tableName;
+        $sql = 'delete from '.$this->true_tableName;
         if($id !== null && $this->options['where'] == ''){
-            $this->sql .= ' where id='.$id;
+            $sql .= ' where id='.$id;
         }else{
             if($this->options['where'] != ''){
-                $this->sql .= ' '.$this->options['where'].' ';
+                $sql .= ' '.$this->options['where'].' ';
             }
             if($this->options['limit'] != ''){
-                $this->sql .= ' '.$this->options['limit'];
+                $sql .= ' '.$this->options['limit'];
 
             }
         }
         try{
-            $this->last_sql=$this->sql;
-            $in = $this->db->link->exec($this->sql);
+            $this->last_sql=$sql;
+            $in = $this->db->link->exec($sql);
             if($in){
                 return $in;
             }else{
@@ -283,7 +282,6 @@ class Model{
             }
         }
         return false;
-
     }
     public function feilds($feilds){
         $this->options['feilds']=$feilds;
@@ -484,6 +482,7 @@ class Model{
 		foreach ($arr as $v){
 			if(is_array($v)){
 				$b = true;
+                break;
 			}
 		}
 		return $b;

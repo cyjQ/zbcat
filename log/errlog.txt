@@ -2,3 +2,6 @@
 
 createMenu Error:invalid credential, access_token is invalid or not latest hint: [2SU4JA0332tsz4!] 2016-11-15 16:08:51
 createMenu Error:api unauthorized hint: [1vypuA0413tsz9!] 2016-11-15 16:10:12
+function imagecreatefromjpg is not exists 2016-11-16 10:04:11
+function imagecreatefromjpg is not exists 2016-11-16 10:04:42
+function imagecreatefromjpg is not exists 2016-11-16 10:04:52

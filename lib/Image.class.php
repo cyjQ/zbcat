@@ -4,6 +4,7 @@ class Image{
     protected $allowType;
     protected $imgFile;
     protected $imgInfo;
+    protected $cropPrefix='crap';
     protected $err = array(
         'msg'=>'',
         'code'=>0
@@ -78,13 +79,18 @@ class Image{
     /*
      * 图片的裁剪
      */
-    public function cropImg($height,$width,$srcx,$srcy){
+    public function cropImg($height,$width,$srcx,$srcy,$savepath=''){
         if($height<=0 || $width<=0){
             $this->setErr('cropImg Error:the param height or width is not rightful!',4);
             return false;
         }
         $imgInfo = $this->getImgInfo();
-        $imFunc = 'imagecreatefrom'.$imgInfo['type'];
+        if($imgInfo['type'] == 'jpg'){
+            $funExt = 'jpeg';
+        }else{
+            $funExt = $imgInfo['type'];
+        }
+        $imFunc = 'imagecreatefrom'.$funExt;
         $im =  imagecreatetruecolor($width,$height);
         if(function_exists($imFunc)){
             $imSrc = $imFunc($this->imgFile);
@@ -93,6 +99,22 @@ class Image{
             return false;
         }
 
+        imagecopyresampled($im,$imSrc,0,0,$srcx,$srcy,$imgInfo['width'],$imgInfo['height'],$imgInfo['width'],$imgInfo['height']);
+        $saveFun = 'image'.$funExt;
+        if($savepath){
+            $filename = $savepath.$this->buildFileName();
+        }else{
+            $filename = substr(str_replace('\\','/',$this->imgFile),0,strripos(str_replace('\\','/',$this->imgFile),'/')).'/'.$this->cropPrefix.'_'.$this->buildFileName();
+        }
+        if(function_exists($saveFun)){
+            if($saveFun($im,$filename)) {
+                return $filename;
+            }
+        }else{
+            errlog('crop image error,the function '.$saveFun.' is not found');
+            return false;
+        }
+        return false;
     }
 
     /*
@@ -102,6 +124,25 @@ class Image{
         $this->err['msg'] = $msg;
         $this->err['code'] = $code;
         errlog($this->err['msg']);
+    }
+
+    /*
+     * 生成文件名
+     */
+
+    protected function buildFileName($len=32){
+        $str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $fileName = (string)time();
+        $len = $len - strlen($fileName);
+        if($len < 0){
+            errlog('buildFileName Error:file name need min len '.strlen($fileName));
+            return false;
+        }
+        for($i=0;$i<$len;$i++){
+            $fileName .= str_shuffle($str)[$i];
+        }
+        $fileName .= '.'.$this->getImgInfo()['type'];
+        return $fileName;
     }
 
     /*
