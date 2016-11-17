@@ -26,6 +26,19 @@ class CModel{
         $banner = C('Banner');
         $this->assign('banner',$banner);
         $this->assign('text_message',C('Text_message'));
+        $this->getUserInfo();
+
+        $current_banner = I('current_banner','','trim');
+        $current_banner = $current_banner == ''?1:$current_banner;
+        $this->assign('current_banner',$current_banner);
+
+        if($current_banner == 2){
+            $user_left_banner = C('UserCenter');
+            $current_left_banner = I('current_left_banner','','trim');
+            $current_left_banner = $current_left_banner==''?1:$current_left_banner;
+            $this->assign('user_left_banner',$user_left_banner);
+            $this->assign('current_left_banner',$current_left_banner);
+        }
     }
 
     /*
@@ -141,4 +154,17 @@ class CModel{
         header("Location: $url");
         return;
     }
+
+    public function getUserInfo(){
+        if(!Session::is_login()){
+            $this->assign('user',false);
+            return;
+        }
+        $user = D('user');
+        $userinfo = $user->where(array('id'=>session('id')))->find();
+        $this->assign('user',$userinfo);
+
+
+    }
+
 }

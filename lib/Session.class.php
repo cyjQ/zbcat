@@ -39,7 +39,7 @@ final class Session{
     }
 
     public static function uGoTo($is_redict=true){
-        $url = self::get('goto')?self::get('goto'):'./?m=user&c=ucenter';
+        $url = self::get('goto')?self::get('goto'):'./?m=user&c=ucenter&current_banner=2';
         if($is_redict){
             header('Location: ./?m=user&c=ucenter');
             return true;

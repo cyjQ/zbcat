@@ -3,6 +3,7 @@
 <script src="<{$__PLUGIN__}>/cropper/assets/js/jquery.min.js"></script>
 <script src="<{$__PLUGIN__}>/cropper/assets/js/bootstrap.min.js"></script>
 <script src="<{$__PLUGIN__}>/cropper/dist/cropper.js"></script>
+<script src="<{$__PLUGIN__}>/layer/layer.min.js"></script>
 <style>
     .img-handler-btn{
         background: #78B658;
@@ -44,7 +45,7 @@
         </div>
         <div class="col-sm-3">
             <div class="preview">
-aa
+
             </div>
         </div>
     </div>
@@ -121,7 +122,13 @@ aa
             contentType: false,
             processData: false,
             success:function(e){
-                alert(e);
+                var data = $.parseJSON(e);
+                console.log(data)
+                if(data.code ==0){
+                    layer.msg(data.msg,{icon:1,time:1000},function () {
+                        parent.layer.close(1);
+                    });
+                }
             }
         })
 

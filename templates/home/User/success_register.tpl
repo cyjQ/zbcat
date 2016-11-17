@@ -10,7 +10,7 @@
                 <span>现在你可以开启你的记账之旅了</span><br/>
                 <span>也可以到个人中心去完善自己的个人资料</span>
                 <a class="btn btn-info" style="margin-top: 10px;background: #00C1B3;margin-right: 20px;width: 110px;">开始记账</a>
-                <a class="btn btn-info" style="margin-top: 10px;background: #f5f5f5;border:1px solid #d5d5d5;color: #222222;">完善个人资料</a>
+                <a class="btn btn-info" href="./?m=user&c=ucenter&current_banner=2" style="margin-top: 10px;background: #f5f5f5;border:1px solid #d5d5d5;color: #222222;">完善个人资料</a>
             </div>
         </div>
     </div>

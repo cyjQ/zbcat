@@ -122,7 +122,6 @@
         var $form = $(e.target);
         var bv = $form.data('bootstrapValidator');
         $.post("./?m=user&c=register_handler", $form.serialize(), function (data) {
-            alert(data);return;
             console.log($.parseJSON(data));
             data = $.parseJSON(data);
             if(data.code ==0){

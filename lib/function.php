@@ -249,6 +249,18 @@
 
     }
 
+    function jsOutput($msg,$code = 0){
+
+        if(is_array($msg)){
+            exit(json_encode($msg));
+        }
+        if(trim($msg) == '' || $msg == null){
+            errlog(__FUNCTION__.' error: the param msg is request');
+            return false;
+        }
+        exit(json_encode(array('code'=>$code,'msg'=>$msg)));
+    }
+
 
 
 

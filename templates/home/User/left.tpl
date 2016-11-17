@@ -5,30 +5,15 @@
                 </button>
             </div>
             <div class="col-sm-12 collapse navbar-collapse" style="width: auto;border:none;" id="user-nav">
-                <div class="user-nav-p">
-                    <div class="user-nav-left-header"><span class="glyphicon glyphicon-user"></span> 个人信息 &nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></div>
-                    <ul class="nav nav-pills nav-stacked user-nav-left-ul">
-                        <li><a href="#">个人资料</a></li>
-                        <li><a href="#">修改密码</a></li>
-                    </ul>
-                </div>
-                <div class="user-nav-p">
-                    <div class="user-nav-left-header"><span class="glyphicon glyphicon-list-alt"></span> 记账信息 &nbsp;&nbsp;<span class="glyphicon glyphicon-minus"></span> </div>
-                    <ul class="nav nav-pills nav-stacked user-nav-left-ul">
-                        <li><a href="#">添加账单</a></li>
-                        <li><a href="#">总账概况</a></li>
-                        <li><a href="#">总账概况</a></li>
-                        <li><a href="#">记账科目</a></li>
-                    </ul>
-                </div>
-                <div class="user-nav-p">
-                    <div class="user-nav-left-header"><span class="glyphicon glyphicon-home"></span> 社区信息 &nbsp;&nbsp;<span class="glyphicon glyphicon-minus"></span></div>
-                    <ul class="nav nav-pills nav-stacked user-nav-left-ul">
-                        <li><a href="#">添加账单</a></li>
-                        <li><a href="#">收入明细</a></li>
-                        <li><a href="#">支出明细</a></li>
-                        <li><a href="#">记账科目</a></li>
-                    </ul>
-                </div>
+                <{foreach $user_left_banner as $banner}>
+                    <div class="user-nav-p">
+                        <div class="user-nav-left-header"><span class="glyphicon glyphicon-user"></span> <{$banner.name}> &nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></div>
+                        <ul class="nav nav-pills nav-stacked user-nav-left-ul">
+                            <{foreach $banner['subs'] as $vo}>
+                               <li <{if $current_left_banner == $vo.id}>style="background:red;"<{/if}>><a href="<{$vo.url}>&current_left_banner=<{$vo.id}>&current_banner=<{$current_banner}>"><{$vo.name}></a></li>
+                            <{/foreach}>
+                        </ul>
+                    </div>
+                <{/foreach}>
             </div>
 </nav>

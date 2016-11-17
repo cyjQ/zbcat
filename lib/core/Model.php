@@ -139,12 +139,19 @@ class Model{
 	 * 查询结果集
 	 */
 	public function select(){
-        foreach ($this->options as $key =>$val){
-            $this->sql = str_replace('%'.$key.'%'," ".$val." ",$this->sql);
+	    if($this->options['feilds'] == '' || !(isset($this->options['feilds']))){
+	        $this->options['feilds'] = $this->get_table_feilds();
         }
-        $this->last_sql = $this->sql;
+        $sql = $this->sql;
+        foreach ($this->options as $key =>$val){
+            $sql = str_replace('%'.$key.'%'," ".$val." ",$sql);
+        }
+        //清空$this->option数组，以备下次查询
+        $this->options['where'] = $this->options['limit']= $this->options['feilds'] = $this->options['order'] = '';
+
+        $this->last_sql = $sql;
         try{
-                $sth = $this->db->link->prepare($this->sql);
+                $sth = $this->db->link->prepare($sql);
                 $sth->execute();
                 return $sth->fetchAll(PDO::FETCH_ASSOC);
             }catch (PDOException $pdoerr){
@@ -167,16 +174,19 @@ class Model{
                 return false;
             }
             $this->active = 'upd';
-            $this->sql = $this->autoSql($data);
+            $sql = $this->autoSql($data);
             if($this->options['where'] != ''){
-                $this->sql .=" ".$this->options['where']." ";
+                $sql .=" ".$this->options['where']." ";
             }
             if($this->options['limit'] != ''){
-                $this->sql .= " ".$this->options['limit'];
+                $sql .= " ".$this->options['limit'];
             }
-            $this->last_sql = $this->sql;
+
+            //清空条件语句以备下次查询
+            $this->options['limit'] = $this->options['where'] = '';
+            $this->last_sql = $sql;
             try{
-                $in = $this->db->link->exec($this->sql);
+                $in = $this->db->link->exec($sql);
                 if($in){
                     return $in;
                 }else{

@@ -28,12 +28,17 @@ class User extends CModel {
             if($data['pwd'] != $repwd){
                 exit(json_encode(array('code'=>2,'msg'=>'密码与确认密码不一致!')));
             }
+            $user = D('user');
+            $res = $user->where(array('email'=>$data['email']))->find();
+            if($res){
+                exit(json_encode(array('code'=>3,'msg'=>'该邮箱已注册')));
+            }
             $data['pwd'] = md5($data['pwd']);
             $data['create_time'] = time();
             $data['IP'] = $_SERVER['REMOTE_ADDR'];
-            $user = D('user');
+
             $res = $user->add($data);
-            var_dump($res);exit;
+            $res = $user->where(array('id'=>$res))->find();
             if($res){
                 session('login_ip',$_SERVER['REMOTE_ADDR']);
                 session('id',$res['id']);
@@ -63,6 +68,8 @@ class User extends CModel {
                 session('login_ip',$_SERVER['REMOTE_ADDR']);
                 session('id',$res['id']);
                 session('username',$res['username']);
+                $last_login_time = $res['this_login_time'];
+                $user->where(array('id'=>$res['id']))->save(array('last_login_time'=>$last_login_time,'this_login_time'=>time()));
                 exit(json_encode(array('code'=>0,'msg'=>'登录成功','redirect_url'=>Session::uGoTo(false))));
             }else{
                 exit(json_encode(array('code'=>2,'msg'=>'用户名或密码错误')));
@@ -93,8 +100,28 @@ class User extends CModel {
         $this->display();
     }
 
+    /*
+     * pc端用户头像设置页面
+     */
     public function set_avatar_pc(){
         $this->display();
+    }
+
+    /*
+     * 保存用户信息
+     */
+    public function save_info(){
+        $data = array_map('htmlentities',array_map('trim',$_POST));
+        if(time($data['birthday']) != ''){
+            $data['birthday'] = strtotime($data['birthday']);
+        }
+        $user = D('user');
+        $res = $user->where(array('id'=>session('id')))->save($data);
+        if($res){
+            jsOutput('保存成功!');
+        }else{
+            jsOutput('失败，请重试',1);
+        }
     }
 
     /*
@@ -107,13 +134,22 @@ class User extends CModel {
             $img = Image::getIns($res);
             $avtar = $img->cropImg($_POST['height'],$_POST['width'],$_POST['x'],$_POST['y']);
             if($avtar){
-                var_dump($_SESSION);
                 $user = D('user');
-
+                if($res = $user->where(array('id'=>session('id')))->save(array('avatar'=>$avtar))){
+                    exit(json_encode(array('code'=>0,'msg'=>'头像设置成功')));
+                }else{
+                    exit(json_encode(array('code'=>0,'msg'=>'头像设置失败')));
+                }
+            }else{
+                $err = $img->getErr();
+                exit(json_encode($err));
             }
         }
     }
 
+    /*
+     * 退出登录
+     */
     public function login_out(){
         session('login_ip','');
         session('id','');

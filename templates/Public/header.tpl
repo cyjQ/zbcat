@@ -39,15 +39,31 @@
             </div>
         </div>
         <div class="col-sm-3 user-div" style="height: 60px;padding: 0px;">
-            <div class="user-avater">
-                <img src="<{$__IMG__}>home/noavatar_small.gif" class="img-responsive">
-            </div>
-            <div class="user-name">
-                <div style="height: 48%">欢迎你：<span class="name"><{$smarty.session.username}></span> | <a href="./?m=user&c=login_out"> 退出 </a></div>
-                <div style="height: 48%">
-                    2016.10.26
+            <{if $user != false}>
+                <div class="user-avater">
+                    <{if $user['avatar']}>
+                         <img src="<{$user.avatar}>" class="img-responsive">
+                    <{else}>
+                         <img src="<{$__IMG__}>home/noavatar_small.gif" class="img-responsive">
+                    <{/if}>
                 </div>
-            </div>
+                <div class="user-name">
+                    <div style="height: 48%">欢迎你：<span class="name"><{$user.username}></span> | <a href="./?m=user&c=login_out">  退出 </a> </div>
+                    <div style="height: 48%">
+                        <{$smarty.now|date_format:"Y-m-d H:i"}>
+                    </div>
+                </div>
+            <{else}>
+                <div class="user-avater">
+                    <img src="<{$__IMG__}>home/noavatar_small.gif" class="img-responsive">
+                </div>
+                <div class="user-name">
+                    <div style="height: 48%">欢迎你：游客| <a href="./?m=user&c=login"> 登录 </a></span> </div>
+                    <div style="height: 48%">
+                        <{$smarty.now|date_format:"Y-m-d H:i"}>
+                    </div>
+                </div>
+            <{/if}>
         </div>
     </div>
 </div>
@@ -63,7 +79,7 @@
         <div class="collapse navbar-collapse nav-div" id="example-navbar-collapse">
             <ul class="nav navbar-nav">
                 <{foreach $banner as $vo}>
-                <li><a href="<{$vo.url}>"><{$vo.name}></a></li>
+                <li><a href="<{$vo.url}>" <{if $current_banner == $vo['id']}>class="clicked" style="color:#78B658;font-weight: bold"<{/if}>><{$vo.name}></a></li>
                 <{/foreach}>
             </ul>
         </div>

@@ -1,4 +1,6 @@
 <{include file="Public/header.tpl"}>
+<script src="<{$__PLUGIN__}>bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<link href="<{$__PLUGIN__}>bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <div class="container">
     <div class="row">
         <{include file="home/User/left.tpl"}>
@@ -6,21 +8,25 @@
             <div class="container" style="width: 100%";>
                 <div class="row">
                     <div class="col-sm-3 user-avater-div">
-                        <img src="<{$__IMG__}>home/noavatar_small.gif">
+                        <{if $user['avatar']}>
+                            <img src="<{$user.avatar}>" class="img-responsive">
+                        <{else}>
+                            <img src="<{$__IMG__}>home/noavatar_small.gif" class="img-responsive">
+                        <{/if}>
                     </div>
                     <div class="col-sm-9" style="height: 160px;">
                         <div class="container" style="width: 100%">
                             <div class="row">
                                 <div class="col-sm-12" style="padding: 0px;">
-                                    <span class="center-user-name">飘逝的雪花</span>
+                                    <span class="center-user-name"><{$user.username}></span>
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 10px;">
-                                <div class="ucenter-info">注册时间：2016-9-54</div>
-                                <div class="ucenter-info">上次登录时间：2016-9-54</div>
+                                <div class="ucenter-info">注册时间：<{$user.create_time|date_format:"Y/m/d"}></div>
+                                <div class="ucenter-info">上次登录时间：<{$user.last_login_time|date_format:"Y/m/d H:i"}></div>
                             </div>
                             <div class="row" style="margin-top: 10px;">
-                                <div class="ucenter-info">本次登录IP：2016-9-54</div>
+                                <div class="ucenter-info">本次登录IP：<{$smarty.session.login_ip}></div>
                                 <div class="ucenter-info">上次登录时间：2016-9-54</div>
                             </div>
                             <div class="row" style="margin-top: 20px;">
@@ -32,35 +38,30 @@
                 </div>
                 <div class="row user-info-div" style="height:auto;border-top:2px dotted #d5d5d5;border-bottom: 2px dotted #d5d5d5;padding-bottom: 20px;">
                     <h4>其他信息</h4>
-                    <div class="col-lg-6 col-lg-offset-1">
-                        <div class="form-group form-inline user-info-input" >
-                            <label for="email" class="col-sm-4">电子邮箱：</label>
-                            <input type="text" name="email">
+                    <form id="user-form">
+                        <div class="col-lg-6 col-lg-offset-1">
+                            <div class="form-group form-inline user-info-input" >
+                                <label for="email" class="col-sm-4">电子邮箱：</label>
+                                <input type="text" name="email" value="<{$user.email}>" disabled>
+                            </div>
+                            <div class="form-group form-inline user-info-input" >
+                                <label for="email" class="col-sm-4">手机：</label>
+                                <input type="text" name="phone" value="<{$user.phone}>">
+                            </div>
+                            <div class="form-group form-inline user-info-input">
+                                <label for="email" class="col-sm-4">性别：</label>
+                                <input type="radio" value="1"  name="sex"<{if $user.sex == 1 }> checked<{/if}>> 男   &nbsp;&nbsp;&nbsp;<input name='sex' type="radio" value="0"<{if $user.sex == 0 }>checked<{/if}>> 女
+                            </div>
+                            <div class="form-group form-inline user-info-input">
+                                <label for="email" class="col-sm-4">生日：</label>
+                                <input type="text" value="<{$user.birthday|date_format:"Y/m/d"}>" id="birthday" name="birthday" data-date-format="yyyy/mm/dd">
+                            </div>
                         </div>
-                        <div class="form-group form-inline user-info-input" >
-                            <label for="email" class="col-sm-4">手机：</label>
-                            <input type="text" name="phone">
-                        </div>
-                        <div class="form-group form-inline user-info-input">
-                            <label for="email" class="col-sm-4">电子邮箱：</label>
-                            <input type="text" name="email">
-                        </div>
-                        <div class="form-group form-inline user-info-input">
-                            <label for="email" class="col-sm-4">生日：</label>
-                            <input type="date" name="birthday">
-                        </div>
-                        <div class="form-group form-inline user-info-input">
-                            <label for="email" class="col-sm-4">居住地：</label>
-                            <select>
-                                <option>省</option>
-                            </select>
-
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="row">
                     <div class="col-sm-3 col-lg-offset-1">
-                        <button class="btn  btn-info" style="margin:20px 0px;">保存</button>
+                        <button class="btn  btn-info" style="margin:20px 0px;" id="user-save">保存</button>
                     </div>
                 </div>
 
@@ -81,6 +82,54 @@
             $(this).children('span').eq(1).prop('class','glyphicon');
             $(this).children('span').eq(1).prop('class','glyphicon-minus');
         }
+    });
+    $.fn.datetimepicker.dates['zh'] = {
+        days:       ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六","星期日"],
+        daysShort:  ["日", "一", "二", "三", "四", "五", "六","日"],
+        daysMin:    ["日", "一", "二", "三", "四", "五", "六","日"],
+        months:     ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月","十二月"],
+        monthsShort:  ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"],
+        meridiem:    ["上午", "下午"],
+        //suffix:      ["st", "nd", "rd", "th"],
+        today:       "今天"
+    };
+
+    $('#birthday').datetimepicker({
+        language:  'zh',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView:2,
+        forceParse: 0,
+        showMeridian: 1,
+        maxView:4
+    });
+
+    /*提交保存用户信息*/
+    $('#user-save').click(function(){
+        if($('input[name="phone"]').val() !=''){
+            var phone_preg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            var tel = $('input[name="phone"]').val();
+            if(!phone_preg.test(tel)){
+                layer.tips('请输入有效的手机号码', $('input[name="phone"]'), {
+                    tips: [2, '#1ab394']
+                });
+                return false;
+            }
+        }
+        $.post("./?m=user&c=save_info", $('#user-form').serialize(), function (data) {
+            console.log($.parseJSON(data));
+            data = $.parseJSON(data);
+            if(data.code==0){
+                layer.msg(data.msg,{icon:1,time:1000},function () {
+                    location.reload();
+                });
+            }else{
+                layer.msg(data.msg,{icon:5,time:1000});
+            }
+        });
     });
     function scrollx(p) {
         var d = document, dd = d.documentElement, db = d.body, w = window, o = d.getElementById(p.id), ie6 = /msie 6/i.test(navigator.userAgent), style, timer;
@@ -160,6 +209,9 @@
             area:['800px','500px'],
             content:['./?m=user&c=set_avatar_pc','no'],
             shift: 2,
+            end:function () {
+                location.reload();
+            }
         });
     });
     $('#set-avatar-ph').click(function(){
