@@ -108,6 +108,38 @@ class Wchat{
         }
     }
 
+    public function getJsTicket(){
+        $accessToken = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=$accessToken&type=wx_card";
+        $res = https_request($url);
+        if($res){
+            return $res;
+        }
+        return false;
+    }
+
+    /*
+     * 获取js-sdk配置
+     */
+
+    function getJssdkConfig(){
+        $url = I('url','','trim');
+        Validator::validate(array(
+            array($url,array('require','url'),'参数错误')
+        ));
+        if(Validator::getIns()->getError()['code'] != 0){
+            jsOutput(Validator::getIns()->getError());
+            errlog(__FUNCTION__.'Error:'.'this param url is need ,empty give');
+        }
+        $conf['appid'] = C('appid');
+        $conf['secret'] = C('secret');
+        $conf['timestamp'] = time();
+        $js_ticket = $this->getJsTicket();
+        $ticket = json_decode($js_ticket);
+        var_dump($ticket);
+
+    }
+
 
 
 }

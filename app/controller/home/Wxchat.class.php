@@ -61,4 +61,11 @@ class Wxchat extends CModel {
         return $this->wx->getWxIp();
     }
 
+    /*
+     * 获取js-sdk配置
+     */
+    public function getJssdkConfig(){
+        $res = Wchat::getIns()->getJssdkConfig();
+
+    }
 }

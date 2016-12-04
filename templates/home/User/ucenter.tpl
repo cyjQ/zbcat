@@ -215,6 +215,10 @@
         });
     });
     $('#set-avatar-ph').click(function(){
+        $.ajax({
+           method:'post',
+            url:'./m=wxchat&c='
 
+        });
     });
 </script>
