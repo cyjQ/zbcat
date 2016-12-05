@@ -27,7 +27,8 @@
          'lt',
          'gt',
          'maxlen',
-         'minlen'
+         'minlen',
+         'url'
      );
 
     protected function __construct(){
@@ -211,6 +212,14 @@
      */
      protected function vd_minlen($val){
          return strlen($this->validate_data) >= $val;
+     }
+
+     /*
+      * 验证url
+      */
+
+     protected function vd_url(){
+        return filter_var($this->validate_data,FILTER_VALIDATE_URL);
      }
 
  }

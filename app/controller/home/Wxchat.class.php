@@ -65,7 +65,9 @@ class Wxchat extends CModel {
      * 获取js-sdk配置
      */
     public function getJssdkConfig(){
-        $res = Wchat::getIns()->getJssdkConfig();
+        $appid = C('appid');
+        $secret = C('secret');
+        $res = Wchat::getIns($appid,$secret)->getJssdkConfig();
 
     }
 }

@@ -16,7 +16,7 @@ return array(
     'UserCenter'=>array(
         array('name'=>'个人信息','subs'=>array(
             array('name'=>'个人资料','id'=>1,'url'=>'./?m=user&c=ucenter'),
-            array('name'=>'修改密码','id'=>2,'url'=>'')
+            array('name'=>'修改密码','id'=>2,'url'=>'./?m=user&c=mPwd')
         )),
         array('name'=>'记账信息','subs'=>array(
             array('name'=>'添加账单','id'=>3,'url'=>''),

@@ -157,4 +157,8 @@ class User extends CModel {
         $this->urlJump('login');
     }
 
+    public function mPwd(){
+        $this->display();
+    }
+
 }

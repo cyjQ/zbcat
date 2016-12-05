@@ -25,12 +25,12 @@ class Wchat{
      */
     protected function getAccessToken(){
         $wx_conf = D('wx_conf',1);
-        $res = $wx_conf->select();
+        $res = $wx_conf->where(array('conf_colum'=>'access_token'))->select();
         if(count($res) <1 || ($res[0]['create_time']) < time()){
             $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$this->appid.'&secret='.$this->secret;
             $access_token =  file_get_contents($url);
             $accessTokeData = json_decode($access_token);
-            $data['create_time'] = $accessTokeData->expires_in+time();
+            $data['create_time'] = ($accessTokeData->expires_in+time()-5);
             $data['access_token'] = $accessTokeData->access_token;
             if(count($res) <1){
                 $wx_conf->add($data);
@@ -101,21 +101,50 @@ class Wchat{
         $tmpStr = implode( $tmpArr );
         $tmpStr = sha1( $tmpStr );
 
-        if( $tmpStr == $signature ){
+        if( $tmpStr == $signature){
             return true;
         }else{
             return false;
         }
     }
 
-    public function getJsTicket(){
-        $accessToken = $this->getAccessToken();
-        $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=$accessToken&type=wx_card";
-        $res = https_request($url);
-        if($res){
-            return $res;
+    public function create_noncestr(){
+        $str = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $str = str_shuffle($str);
+        $nostr = '';
+        for ($i=0;$i<8;$i++){
+            $nostr .= $str[$i];
         }
-        return false;
+        return sha1(time().$nostr);
+    }
+
+
+    /*
+     * 获取js-ticket
+     */
+    public function getJsTicket(){
+        $wx = D('wx_conf',1);
+        $ticket = $wx->where(array('conf_colum'=>'js_ticket'))->find();
+        if(!$ticket || $ticket['create_time'] < time()){
+            $accessToken = $this->getAccessToken();
+            $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=$accessToken&type=wx_card";
+            $res = https_request($url,'');
+            $ticket_info = json_decode($res);
+            if($ticket_info->errcode >0){
+                errlog(__FUNCTION__.': '.$ticket_info->errmsg.' '.__FILE__.' '.__LINE__);
+                return false;
+            }
+            $data['create_time'] = ($ticket_info->expires_in + time() -5);
+            $data['conf_colum'] = 'js_ticket';
+            $data['access_token'] = $ticket_info->ticket;
+            if(!$ticket){
+                $wx->add($data);
+            }elseif($ticket['create_time'] <time()){
+                $wx->where(array('conf_colum'=>'js_ticket'))->save($data);
+            }
+            return $ticket_info->ticket;
+        }
+        return $ticket['access_token'];
     }
 
     /*
@@ -129,14 +158,20 @@ class Wchat{
         ));
         if(Validator::getIns()->getError()['code'] != 0){
             jsOutput(Validator::getIns()->getError());
-            errlog(__FUNCTION__.'Error:'.'this param url is need ,empty give');
+            errlog(__FUNCTION__.'Error:'.'this param url is need ,empty give '.__FILE__.' '.__LINE__);
         }
         $conf['appid'] = C('appid');
-        $conf['secret'] = C('secret');
         $conf['timestamp'] = time();
-        $js_ticket = $this->getJsTicket();
-        $ticket = json_decode($js_ticket);
-        var_dump($ticket);
+        $ticket = $this->getJsTicket();
+        if(!$ticket){
+            errlog('获取js_ticket失败');
+            return false;
+        }
+        $conf['noncestr'] = $this->create_noncestr();
+        $arr = array('url'=>$url,'jsapi_ticket'=>$ticket,'timestamp'=>$conf['timestamp'],'noncestr'=>$conf['noncestr']);
+        sort($arr, SORT_STRING);
+        $conf['signature'] = sha1(implode('&',$arr));
+        exit(json_encode($conf));
 
     }
 
