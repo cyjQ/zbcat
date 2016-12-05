@@ -32,6 +32,7 @@ class Wchat{
             $accessTokeData = json_decode($access_token);
             $data['create_time'] = ($accessTokeData->expires_in+time()-5);
             $data['access_token'] = $accessTokeData->access_token;
+            $data['conf_colum'] = 'access_token';
             if(count($res) <1){
                 $wx_conf->add($data);
             }else if(($res[0]['create_time']) < time()){
@@ -168,9 +169,16 @@ class Wchat{
             return false;
         }
         $conf['noncestr'] = $this->create_noncestr();
-        $arr = array('url'=>$url,'jsapi_ticket'=>$ticket,'timestamp'=>$conf['timestamp'],'noncestr'=>$conf['noncestr']);
-        sort($arr, SORT_STRING);
-        $conf['signature'] = sha1(implode('&',$arr));
+        $tmpArr = array(
+            'url'=>$url,
+            'jsapi_ticket'=>$ticket,
+            'timestamp'=>$conf['timestamp'],
+            'noncestr'=>$conf['noncestr']
+        );
+        ksort($tmpArr, SORT_STRING);
+        $string1 = http_build_query( $tmpArr );
+        $string1 = urldecode( $string1 );
+        $conf['signature'] = sha1( $string1 );
         exit(json_encode($conf));
 
     }

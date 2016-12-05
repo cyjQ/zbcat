@@ -10,7 +10,7 @@
                         <div class="user-nav-left-header"><span class="glyphicon glyphicon-user"></span> <{$banner.name}> &nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></div>
                         <ul class="nav nav-pills nav-stacked user-nav-left-ul">
                             <{foreach $banner['subs'] as $vo}>
-                               <li <{if $current_left_banner == $vo.id}>style="background:red;"<{/if}>><a href="<{$vo.url}>&current_left_banner=<{$vo.id}>&current_banner=<{$current_banner}>"><{$vo.name}></a></li>
+                               <li <{if $current_left_banner == $vo.id}>style="background:#CEF2B9;"<{/if}>><a href="<{$vo.url}>&current_left_banner=<{$vo.id}>&current_banner=<{$current_banner}>"><{$vo.name}></a></li>
                             <{/foreach}>
                         </ul>
                     </div>

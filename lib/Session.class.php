@@ -9,9 +9,10 @@ final class Session{
 
     public static function is_login(){
         if(session('id') && session('username')){
-            if($_SERVER['REMOTE_ADDR'] == session('login_ip')){
+            /*if($_SERVER['REMOTE_ADDR'] == session('login_ip')){
                 return true;
-            }
+            }*/
+            return true;
         }
         return false;
     }

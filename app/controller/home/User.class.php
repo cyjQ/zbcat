@@ -161,4 +161,39 @@ class User extends CModel {
         $this->display();
     }
 
+    /*
+     * 修改密码
+     */
+    public function mpwd_handler(){
+        $old_pwd = I('old_pwd','','trim');
+        $new_pwd = I('new_pwd','','trim');
+        $res_new_pwd = I('res_new_pwd','','trim');
+        Validator::validate(array(
+            array($old_pwd,'require','旧密码必须输入'),
+            array($res_new_pwd,'require','确认新密码必须输入'),
+            array($new_pwd,array(array('minlen',6),array('maxlen',16)),'新密码必填，且必须是6-16位长度'),
+        ));
+        if(Validator::getIns()->getError()['code'] != 0){
+            exit(json_encode(Validator::getIns()->getError()));
+        }
+        if($res_new_pwd != $new_pwd){
+            jsOutput('新密码与确认新密码不一致，请重新输入');
+        }
+        $user = D('user');
+        $user_info = $user->find(session('id'));
+        if(!$user_info){
+            jsOutput('请重新登录',2);
+        }
+        if($user_info['pwd'] != md5($old_pwd)){
+            jsOutput('旧密码输入错误',3);
+        }
+        $res = $user->where(array('id'=>session('id'),'pwd'=>md5($old_pwd)))->save(array('pwd'=>md5($new_pwd)));
+        if($res){
+            jsOutput('密码修改成功');
+        }else{
+            jsOutput('密码修改失败，请重试！',1);
+        }
+
+    }
+
 }

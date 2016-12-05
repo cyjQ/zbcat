@@ -94,7 +94,9 @@
             console.log($.parseJSON(data));
             data = $.parseJSON(data);
             if(data.code ==0){
-                location.href= './?m=user&c=success_register'
+                layer.msg(data.msg,{icon:1,time:1000},function(){
+                    location.href =location.href;
+                });
             }else{
                 layer.msg(data.msg,{icon:5});
             }
