@@ -68,6 +68,5 @@ class Wxchat extends CModel {
         $appid = C('appid');
         $secret = C('secret');
         $res = Wchat::getIns($appid,$secret)->getJssdkConfig();
-
     }
 }

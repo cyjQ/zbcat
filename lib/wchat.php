@@ -116,7 +116,7 @@ class Wchat{
         for ($i=0;$i<8;$i++){
             $nostr .= $str[$i];
         }
-        return sha1(time().$nostr);
+        return $nostr;
     }
 
 
@@ -153,16 +153,10 @@ class Wchat{
      */
 
     function getJssdkConfig(){
-        $url = I('url','','trim');
-        Validator::validate(array(
-            array($url,array('require','url'),'参数错误')
-        ));
-        if(Validator::getIns()->getError()['code'] != 0){
-            jsOutput(Validator::getIns()->getError());
-            errlog(__FUNCTION__.'Error:'.'this param url is need ,empty give '.__FILE__.' '.__LINE__);
-        }
         $conf['appid'] = C('appid');
         $conf['timestamp'] = time();
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $ticket = $this->getJsTicket();
         if(!$ticket){
             errlog('获取js_ticket失败');
@@ -179,6 +173,9 @@ class Wchat{
         $string1 = http_build_query( $tmpArr );
         $string1 = urldecode( $string1 );
         $conf['signature'] = sha1( $string1 );
+        $conf['jsapi_ticket'] = $ticket;
+        $conf['url'] = $url;
+        $conf['string1'] = $string1;
         exit(json_encode($conf));
 
     }

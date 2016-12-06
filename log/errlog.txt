@@ -22,3 +22,11 @@ jsOutputerror: the param msg is request 2016-11-17 15:01:37
 参数错误 2016-12-05 09:39:35
 参数错误 2016-12-05 09:40:06
 参数错误 2016-12-05 09:40:08
+getJsTicket: invalid credential, access_token is invalid or not latest hint: [Qwi2gA0580rsz6!] C:\wamp\www\zbcat\lib\wchat.php 135 2016-12-06 05:52:59
+获取js_ticket失败 2016-12-06 05:52:59
+参数错误 2016-12-06 06:30:27
+参数错误 2016-12-06 06:31:00
+参数错误 2016-12-06 06:31:02
+参数错误 2016-12-06 06:31:28
+getJsTicket: invalid credential, access_token is invalid or not latest hint: [_I3a40829rsz8!] C:\wamp\www\zbcat\lib\wchat.php 135 2016-12-06 08:27:09
+获取js_ticket失败 2016-12-06 08:27:09
