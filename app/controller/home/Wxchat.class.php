@@ -68,5 +68,10 @@ class Wxchat extends CModel {
         $appid = C('appid');
         $secret = C('secret');
         $res = Wchat::getIns($appid,$secret)->getJssdkConfig();
+        if($res){
+            exit(json_encode($res));
+        }else{
+            jsOutput('获取配置失败',3);
+        }
     }
 }

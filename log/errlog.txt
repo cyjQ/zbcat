@@ -30,3 +30,5 @@ getJsTicket: invalid credential, access_token is invalid or not latest hint: [Qw
 参数错误 2016-12-06 06:31:28
 getJsTicket: invalid credential, access_token is invalid or not latest hint: [_I3a40829rsz8!] C:\wamp\www\zbcat\lib\wchat.php 135 2016-12-06 08:27:09
 获取js_ticket失败 2016-12-06 08:27:09
+40001:invalid credential, access_token is invalid or not latest hint: [B8TMWa0681rsz7!] 2016-12-08 08:11:21
+: 2016-12-08 08:11:22

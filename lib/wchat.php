@@ -3,18 +3,18 @@ class Wchat{
     protected $appid;
     protected $secret;
     public static $ins = null;
-    protected function ini($appid,$secret){
-        $this->appid = $appid;
-        $this->secret = $secret;
+    protected function ini(){
+        $this->appid = C('appid');
+        $this->secret = C('secret');
     }
 
-    protected function __construct($appid,$secret){
-        $this->ini($appid,$secret);
+    protected function __construct(){
+        $this->ini();
     }
 
-    public static function getIns($appid,$secret){
+    public static function getIns(){
         if(self::$ins === null){
-            self::$ins = new self($appid,$secret);
+            self::$ins = new self();
         }
         return self::$ins;
 
@@ -36,9 +36,9 @@ class Wchat{
             if(count($res) <1){
                 $wx_conf->add($data);
             }else if(($res[0]['create_time']) < time()){
-                $wx_conf->where(array('id'=>$res[0]['id']))->save($data);
+                $wx_conf->where(array('conf_colum'=>'access_token'))->save($data);
             }
-            return $access_token;
+            return $data['access_token'];
         }else{
             return $res[0]['access_token'];
         }
@@ -53,11 +53,11 @@ class Wchat{
         $ipList = json_decode($ipList);
         if($ipList->errcode){
             if($ipList->errcode == 40001){
-                errlog($ipList->errcode.':'.$ipList->errmsg);
+                errlog(__FUNCTION__.' error:' .$ipList->errcode.':'.$ipList->errmsg.' '.__FILE__.'on '.__LINE__);
                 $url = 'https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token='.$this->getAccessToken();
                 $ipList = json_decode(file_get_contents($url));
                 if($ipList->errcode){
-                    errlog($ipList->errcode.':'.$ipList->errmsg);
+                    errlog(__FUNCTION__.' error:' .$ipList->errcode.':'.$ipList->errmsg.' '.__FILE__.'on '.__LINE__);
                 }
             }
             errlog($ipList->errcode.':'.$ipList->errmsg);
@@ -90,7 +90,6 @@ class Wchat{
         if (!defined("TOKEN")) {
             throw new Exception('TOKEN is not defined!');
         }
-
         $signature = $_GET["signature"];
         $timestamp = $_GET["timestamp"];
         $nonce = $_GET["nonce"];
@@ -109,75 +108,22 @@ class Wchat{
         }
     }
 
-    public function create_noncestr(){
-        $str = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        $str = str_shuffle($str);
-        $nostr = '';
-        for ($i=0;$i<8;$i++){
-            $nostr .= $str[$i];
-        }
-        return $nostr;
-    }
-
-
-    /*
-     * 获取js-ticket
-     */
-    public function getJsTicket(){
-        $wx = D('wx_conf',1);
-        $ticket = $wx->where(array('conf_colum'=>'js_ticket'))->find();
-        if(!$ticket || $ticket['create_time'] < time()){
-            $accessToken = $this->getAccessToken();
-            $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=$accessToken&type=wx_card";
-            $res = https_request($url,'');
-            $ticket_info = json_decode($res);
-            if($ticket_info->errcode >0){
-                errlog(__FUNCTION__.': '.$ticket_info->errmsg.' '.__FILE__.' '.__LINE__);
-                return false;
-            }
-            $data['create_time'] = ($ticket_info->expires_in + time() -5);
-            $data['conf_colum'] = 'js_ticket';
-            $data['access_token'] = $ticket_info->ticket;
-            if(!$ticket){
-                $wx->add($data);
-            }elseif($ticket['create_time'] <time()){
-                $wx->where(array('conf_colum'=>'js_ticket'))->save($data);
-            }
-            return $ticket_info->ticket;
-        }
-        return $ticket['access_token'];
-    }
 
     /*
      * 获取js-sdk配置
      */
 
     function getJssdkConfig(){
-        $conf['appid'] = C('appid');
-        $conf['timestamp'] = time();
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $ticket = $this->getJsTicket();
-        if(!$ticket){
-            errlog('获取js_ticket失败');
-            return false;
+        $url = I('url','');
+        Validator::validate(array(
+            array($url,array('require','url'),'url参数错误')
+        ));
+        if(Validator::getIns()->getError()['code'] != 0){
+            exit(json_encode(Validator::getIns()->getError()));
         }
-        $conf['noncestr'] = $this->create_noncestr();
-        $tmpArr = array(
-            'url'=>$url,
-            'jsapi_ticket'=>$ticket,
-            'timestamp'=>$conf['timestamp'],
-            'noncestr'=>$conf['noncestr']
-        );
-        ksort($tmpArr, SORT_STRING);
-        $string1 = http_build_query( $tmpArr );
-        $string1 = urldecode( $string1 );
-        $conf['signature'] = sha1( $string1 );
-        $conf['jsapi_ticket'] = $ticket;
-        $conf['url'] = $url;
-        $conf['string1'] = $string1;
-        exit(json_encode($conf));
-
+        $jssdk = new JSSDK();
+        $singPackge = $jssdk->getSignPackage($url);
+        return $singPackge;
     }
 
 

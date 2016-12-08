@@ -91,7 +91,6 @@ class User extends CModel {
      * 用户中心
      */
     public function ucenter(){
-
         //判断用户是否登录
         if(!(Session::is_login())){
             $this->urlJump('login');
