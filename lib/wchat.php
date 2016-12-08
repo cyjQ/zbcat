@@ -23,7 +23,7 @@ class Wchat{
     /*
      * 获取公众号的token
      */
-    protected function getAccessToken(){
+    public function getAccessToken(){
         $wx_conf = D('wx_conf',1);
         $res = $wx_conf->where(array('conf_colum'=>'access_token'))->select();
         if(count($res) <1 || ($res[0]['create_time']) < time()){
