@@ -32,3 +32,4 @@ getJsTicket: invalid credential, access_token is invalid or not latest hint: [_I
 获取js_ticket失败 2016-12-06 08:27:09
 40001:invalid credential, access_token is invalid or not latest hint: [B8TMWa0681rsz7!] 2016-12-08 08:11:21
 : 2016-12-08 08:11:22
+SQLSTATE[HY000] [2000] mysqlnd cannot connect to MySQL 4.1+ using the old insecure authentication. Please use an administration tool to reset your password with the command SET PASSWORD = PASSWORD('your_existing_password'). This will store a new, and more secure, hash value in mysql.user. If this user is used in other scripts executed by PHP 5.2 or earlier you might need to remove the old-passwords flag from your my.cnf file 2016-12-09 14:27:14

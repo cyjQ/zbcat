@@ -19,29 +19,26 @@ class Wchat{
         return self::$ins;
 
     }
-
     /*
-     * 获取公众号的token
+     * 获取公众号token
      */
-    public function getAccessToken(){
-        $wx_conf = D('wx_conf',1);
-        $res = $wx_conf->where(array('conf_colum'=>'access_token'))->select();
-        if(count($res) <1 || ($res[0]['create_time']) < time()){
-            $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$this->appid.'&secret='.$this->secret;
-            $access_token =  file_get_contents($url);
-            $accessTokeData = json_decode($access_token);
-            $data['create_time'] = ($accessTokeData->expires_in+time()-5);
-            $data['access_token'] = $accessTokeData->access_token;
-            $data['conf_colum'] = 'access_token';
-            if(count($res) <1){
-                $wx_conf->add($data);
-            }else if(($res[0]['create_time']) < time()){
-                $wx_conf->where(array('conf_colum'=>'access_token'))->save($data);
+    private function getAccessToken() {
+        $data = json_decode($this->get_php_file("access_token.php"));
+        if ($data->expire_time < time()) {
+            // 如果是企业号用以下URL获取access_token
+            // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
+            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appid&secret=$this->secret";
+            $res = json_decode(httpGet($url));
+            $access_token = $res->access_token;
+            if ($access_token) {
+                $data->expire_time = time() + 7000;
+                $data->access_token = $access_token;
+                $this->set_php_file("access_token.php", json_encode($data));
             }
-            return $data['access_token'];
-        }else{
-            return $res[0]['access_token'];
+        } else {
+            $access_token = $data->access_token;
         }
+        return $access_token;
     }
 
     /*
@@ -108,6 +105,40 @@ class Wchat{
         }
     }
 
+    /*
+     * 获取js-sdk ticket
+     */
+    private function getJsApiTicket() {
+        $data = json_decode($this->get_php_file("jsapi_ticket.php"));
+        if ($data->expire_time < time()) {
+            $accessToken = $this->getAccessToken();
+            $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=$accessToken";
+            $res = json_decode(httpGet($url));
+            $ticket = $res->ticket;
+            if ($ticket) {
+                $data->expire_time = time() + 7000;
+                $data->jsapi_ticket = $ticket;
+                $this->set_php_file("jsapi_ticket.php", json_encode($data));
+            }
+        } else {
+            $ticket = $data->jsapi_ticket;
+        }
+
+        return $ticket;
+    }
+
+    /*
+     *创建随机字符串
+     */
+    private function createNonceStr($length = 16) {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $str = "";
+        for ($i = 0; $i < $length; $i++) {
+            $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+        }
+        return $str;
+    }
+
 
     /*
      * 获取js-sdk配置
@@ -121,9 +152,29 @@ class Wchat{
         if(Validator::getIns()->getError()['code'] != 0){
             exit(json_encode(Validator::getIns()->getError()));
         }
-        $jssdk = new JSSDK();
-        $singPackge = $jssdk->getSignPackage($url);
-        return $singPackge;
+        $jsapiTicket = $this->getJsApiTicket();
+        $timestamp = time();
+        $nonceStr = $this->createNonceStr();
+        $string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
+        $signature = sha1($string);
+        $signPackage = array(
+            "appId"     => $this->appid,
+            "nonceStr"  => $nonceStr,
+            "timestamp" => $timestamp,
+            "url"       => $url,
+            "signature" => $signature,
+            "rawString" => $string
+        );
+        return $signPackage;
+    }
+
+    private function get_php_file($filename) {
+        return trim(substr(file_get_contents($filename), 15));
+    }
+    private function set_php_file($filename, $content) {
+        $fp = fopen($filename, "w");
+        fwrite($fp, "<?php exit();?>" . $content);
+        fclose($fp);
     }
 
 

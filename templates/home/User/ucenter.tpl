@@ -179,7 +179,6 @@
             success:function(res){
                 var conf = $.parseJSON(res);
                 console.log(conf);
-                alert(conf.url);
                 wx.config({
                     debug: true,
                     appId: conf.appId,
@@ -238,17 +237,23 @@
         });
     });
     $('#set-avatar-ph').click(function(){
-        choseImage();
+        layer.open({
+            type:1,
+            title:'头像设置',
+            area:['300px','200px'],
+            content:'aa'
+        });
     });
 
     function choseImage(){
+        var localId;
         wx.chooseImage({
             count: 1, // 默认9
             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
             success: function (res) {
                 var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                alert(localIds);
+
             }
         });
     }
