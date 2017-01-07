@@ -2,9 +2,12 @@
 return array(
     'Banner'=>array(
         array('id'=>1,'name'=>'首页','url'=>'./'),
+        array('id'=>7,'name'=>'辣妈记账','url'=>''),
         array('id'=>3,'name'=>'广场','url'=>'#'),
+        array('id'=>6,'name'=>'抓宝猫','url'=>''),
         array('id'=>2,'name'=>'个人中心','url'=>'./?m=user&c=ucenter&current_banner=2'),
-        array('id'=>6,'name'=>'关于我们','url'=>'#'),
+        array('id'=>7,'name'=>'关于我们','url'=>'#'),
+        array('id'=>8,'name'=>'消息','url'=>'#'),
     ),
     'Text_message'=>array(
         '简单实用',

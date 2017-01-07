@@ -1,18 +1,11 @@
 <{include file="Public/header.tpl" title=foo}>
-<div class="container body-div" style="background: url('<{$__IMG__}>home/left_backimg.png')">
+<link href="<{$__CSS__}>/home/index.css" rel="stylesheet">
+<div class="container" id="banner_div">
     <div class="row">
-        <div class="col-sm-12 text-message">Learning to Live</div>
-        <div class="col-sm-12 text-message">To learn how to manage money</div>
-        <div class="col-sm-12 text-message">Starting from an account</div>
-        <div class="col-sm-6 sigin-in">
-            <p>Existing account？</p>
-            <a type="button" class="btn btn-default btn-lg" href="./?m=user&c=login">Sign in</a>
-        </div>
-        <div class="col-sm-6 register-in">
-            <p>No account？</p>
-            <a type="button" class="btn btn-default btn-lg" href="./?m=user&c=register">Register</a>
-        </div>
+        <div class="col-sm-6 banner_left">
 
+        </div>
+        <div class="col-sm-6" style="border:1px solid red"  >
+        </div>
     </div>
 </div>
-<{include file="Public/footer.tpl" title=foo}>

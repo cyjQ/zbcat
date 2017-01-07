@@ -4,7 +4,7 @@
 		//'dbhost'       => 'qdm109341474.my3w.com',
 		'dbuser'       => 'root',
 		//'dbuser'       => 'qdm109341474',
-		'dbpwd'        => '',
+		'dbpwd'        => '123456',
 		'character'    => 'utf8',
 		'dbname'       => 'zbcat',
 		//'dbname'       => 'qdm109341474_db',

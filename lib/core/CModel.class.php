@@ -39,6 +39,8 @@ class CModel{
             $this->assign('user_left_banner',$user_left_banner);
             $this->assign('current_left_banner',$current_left_banner);
         }
+
+        $this->assign('site_name',C('site_name'));
     }
 
     /*

@@ -1,0 +1,9 @@
+#banner_div{
+    heigth:400px;
+    clear: both;
+    background: url("http://img5.duitang.com/uploads/item/201412/17/20141217204721_xBUFY.thumb.700_0.jpeg");
+}
+.banner_left{
+    height:400px;
+    border:1px solid red;
+}

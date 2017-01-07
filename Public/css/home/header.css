@@ -1,0 +1,14 @@
+.navbar{
+    background: #fff;
+    border:none;
+    text-transform:uppercase;
+    padding: 18px 0 14px;
+    font-size: 14px;
+    border-top: 5px solid red;
+}
+.clear{
+    border:0px;
+    padding:0px;
+    margin:0px;
+    clear: both;
+}
