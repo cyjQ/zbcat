@@ -1,0 +1,117 @@
+.account_click{
+    border-radius: 15px;
+    background: #ff3333;
+    color:#ffffff;
+    font-weight: bold;
+}
+.account_click a{
+    color:#ffffff;
+}
+.account_title{
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    border-bottom: 1px solid #ce8483;
+}
+.account_info{
+    width: 100%;
+    height: 100px;
+}
+.account_info .account_sj{
+    padding-top: 10px;
+}
+.account_info .account_sj span{
+    color:#5D5D5D;
+    font-size: 12px;
+    text-align: center;
+}
+.account_info .account_sj p{
+    margin-top: 20px;
+    color: red;
+    font-size: 32px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+.left{
+   height: 400px;
+}
+.account_info table{
+    width: 100%;
+    margin-top: 10px;
+}
+.account_info table .title_td{
+    color:#5D5D5D;
+    font-size: 12px;
+    height: 30px;
+}
+.account_info table .sj-td{
+    font-size: 20px;
+    height: auto;
+    padding-top: 20px;
+}
+.account_info table td{
+    width: 130px;
+}
+.sr-sj{
+    color:red;
+}
+.zc-sj{
+    color:green;
+}
+.user_account_info{
+    width: 100%;
+    height: auto;
+}
+.account_user_avatar{
+    text-align: center;
+}
+.account_user_avatar p{
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+.user-avater{
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+}
+.user-jl{
+    width: 100%;
+    padding: 2px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.tuchu{
+    font-size: 16px;font-weight: bold
+}
+.account_nav{
+    width: 100%;
+    height: auto;
+}
+.account_nav ul{
+    border:0px;
+    padding: 0px;
+    margin: 0px;
+}
+.account_nav li{
+    float: left;
+    height: 30px;
+    width: 90px;
+    line-height: 30px;
+    text-align: center;
+    list-style: none;
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+.account_nav li a{
+    color: #595959;
+}
+.account_nav li.click{
+    background: red;
+    border-radius: 50px;
+}
+.account_nav li.click a{
+    color: #ffffff;
+}

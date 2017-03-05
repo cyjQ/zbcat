@@ -139,9 +139,11 @@ class Image{
             return false;
         }
         for($i=0;$i<$len;$i++){
-            $fileName .= str_shuffle($str)[$i];
+            $shuf_str = str_shuffle($str);
+            $fileName .= $shuf_str[$i];
         }
-        $fileName .= '.'.$this->getImgInfo()['type'];
+        $imgInfo = $this->getImgInfo();
+        $fileName .= '.'.$imgInfo['type'];
         return $fileName;
     }
 

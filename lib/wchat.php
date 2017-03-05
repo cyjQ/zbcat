@@ -149,7 +149,8 @@ class Wchat{
         Validator::validate(array(
             array($url,array('require','url'),'url参数错误')
         ));
-        if(Validator::getIns()->getError()['code'] != 0){
+        $err = Validator::getIns()->getError();
+        if($err['code'] != 0){
             exit(json_encode(Validator::getIns()->getError()));
         }
         $jsapiTicket = $this->getJsApiTicket();

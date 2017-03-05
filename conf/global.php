@@ -1,4 +1,4 @@
 <?php
 return array(
-    'site_name'=>'辣妈日常'
+    'site_name'=>'抓宝猫日常'
 );

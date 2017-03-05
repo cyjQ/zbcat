@@ -22,7 +22,8 @@ class User extends CModel {
             array($data['pwd'],array(array('minlen',6),array('maxlen',16)),'密码必填，且必须是6-16位长度'),
             array($data['email'],array('require','email'),'邮箱必填，且格式需正确'),
         ));
-        if(Validator::getIns()->getError()['code'] != 0){
+        $err = Validator::getIns()->getError();
+        if($err['code'] != 0){
             exit(json_encode(Validator::getIns()->getError()));
         }else{
             if($data['pwd'] != $repwd){
@@ -172,7 +173,8 @@ class User extends CModel {
             array($res_new_pwd,'require','确认新密码必须输入'),
             array($new_pwd,array(array('minlen',6),array('maxlen',16)),'新密码必填，且必须是6-16位长度'),
         ));
-        if(Validator::getIns()->getError()['code'] != 0){
+        $err = Validator::getIns()->getError();
+        if($err['code'] != 0){
             exit(json_encode(Validator::getIns()->getError()));
         }
         if($res_new_pwd != $new_pwd){

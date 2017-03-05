@@ -222,7 +222,8 @@ class Model{
         try{
             $in = $this->db->link->exec($sql);
             if($in){
-                return $this->where($data)->feilds('id')->find()['id'];
+                $data = $this->where($data)->feilds('id')->find();
+                return $data['id'];
             }else{
                 return false;
             }

@@ -39,7 +39,8 @@ class File{
      * 获取文件的后缀
      */
     protected function getSuffix(){
-        $this->file_suffix = explode('/',$this->file['type'])[1];
+        $file_type = explode('/',$this->file['type']);
+        $this->file_suffix = $file_type[1];
         return $this->file_suffix;
     }
 

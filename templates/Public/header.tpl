@@ -30,7 +30,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="logo" href="/"><img alt="Get ExpressVPN" width="175.133" height="36" src="//xvp.akamaized.net/assets/expressvpn-bc464f48199ec426b9ab9ee289582da7.png">
+                <a class="logo" href="/"><img alt="Get ExpressVPN" width="175.133" height="36" src="<{$__IMG__}>home/logo.png">
                 </a></div>
             <div class="navbar-collapse collapse" style="height: 1px;">
                 <ul class="nav navbar-nav navbar-right">

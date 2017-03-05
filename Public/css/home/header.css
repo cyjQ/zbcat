@@ -5,6 +5,7 @@
     padding: 18px 0 14px;
     font-size: 14px;
     border-top: 5px solid red;
+    width: 100%;
 }
 .clear{
     border:0px;
